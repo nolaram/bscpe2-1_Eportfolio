@@ -5,8 +5,7 @@
 </head>
 <body>
 
-<h1>Student Dashboard</h1>
+<h1>Admin Dashboard</h1>
 
 </body>
 </html>
-@endsection
