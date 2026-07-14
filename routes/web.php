@@ -1,20 +1,38 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Adviser\DashboardController as AdviserDashboardController;
+use App\Http\Controllers\Student\DashboardController as StudentDashboardController;
 
+// Home page
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::middleware(['auth', 'role:Admin'])
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
+        Route::get('/dashboard', [AdminDashboardController::class, 'index'])
+            ->name('dashboard');
+    });
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+Route::middleware(['auth', 'role:Adviser'])
+    ->prefix('adviser')
+    ->name('adviser.')
+    ->group(function () {
+        Route::get('/dashboard', [AdviserDashboardController::class, 'index'])
+            ->name('dashboard');
+    });
 
+Route::middleware(['auth', 'role:Student'])
+    ->prefix('student')
+    ->name('student.')
+    ->group(function () {
+        Route::get('/dashboard', [StudentDashboardController::class, 'index'])
+            ->name('dashboard');
+    });
+
+// Load Breeze authentication routes
 require __DIR__.'/auth.php';
