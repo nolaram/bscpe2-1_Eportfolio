@@ -61,6 +61,13 @@
         name="password"
     >
 
+    <p>Confirm Password</p>
+
+    <input
+        type="password"
+        name="password_confirmation"
+    >
+
     <br><br>
 
     <button type="submit">
