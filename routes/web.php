@@ -4,11 +4,38 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Adviser\DashboardController as AdviserDashboardController;
 use App\Http\Controllers\Student\DashboardController as StudentDashboardController;
+use Illuminate\Support\Facades\Auth;
+
+// Route::get('/', function () {
+//     return redirect()->route('login');
+// });
+
+Route::get('/', function () {
+    if (! Auth::check()) {
+        return redirect()->route('login');
+    }
+
+    return match (Auth::user()->role->name) {
+        'Admin' => redirect()->route('admin.dashboard'),
+        'Adviser' => redirect()->route('adviser.dashboard'),
+        'Student' => redirect()->route('student.dashboard'),
+        default => abort(403),
+    };
+});
 
 // Home page
-Route::get('/', function () {
-    return redirect()->route('login');
-});
+// Route::get('/', function () {
+//     return 'Home';
+// });
+
+
+// Route::get('/', function () {
+//     // dd([
+//     //     'logged_in' => Auth::check(),
+//     //     'user' => Auth::user(),
+//     //     'session' => session()->all(),
+//     // ]);
+// });
 
 Route::middleware(['auth', 'role:Admin'])
     ->prefix('admin')
@@ -17,6 +44,14 @@ Route::middleware(['auth', 'role:Admin'])
         Route::get('/dashboard', [AdminDashboardController::class, 'index'])
             ->name('dashboard');
     });
+
+// Route::middleware('auth')
+//     ->prefix('admin')
+//     ->name('admin.')
+//     ->group(function () {
+//         Route::get('/dashboard', [AdminDashboardController::class, 'index'])
+//             ->name('dashboard');
+//     });
 
 Route::middleware(['auth', 'role:Adviser'])
     ->prefix('adviser')

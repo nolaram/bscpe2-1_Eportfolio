@@ -14,10 +14,14 @@ return new class extends Migration
         Schema::create('students', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('role_id')
+            // $table->foreignId('role_id')
+            //         ->constrained()
+            //         ->cascadeOnUpdate()
+            //         ->restrictOnDelete();
+            
+            $table->foreignId('user_id')
                     ->constrained()
-                    ->cascadeOnUpdate()
-                    ->restrictOnDelete();
+                    ->cascadeOnDelete();        
 
             $table->string('student_number')->unique();
 
@@ -32,7 +36,8 @@ return new class extends Migration
             $table->string('company_address')->nullable();
             $table->string('ojt_start_date')->nullable();
             $table->string('ojt_end_date')->nullable();
-            $table->string('timestamps');
+
+            $table->timestamps();
         });
     }
 
