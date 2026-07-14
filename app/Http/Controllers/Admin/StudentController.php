@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\Student;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Student;
 
 class StudentController extends Controller
 {
@@ -12,7 +13,9 @@ class StudentController extends Controller
      */
     public function index()
     {
-        //
+        $students = Student::with('user')->orderBy('student_number')->get();
+
+        return view('admin.students.index', compact('students'));
     }
 
     /**
@@ -34,7 +37,7 @@ class StudentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Student $student)
+    public function show(string $id)
     {
         //
     }
@@ -42,7 +45,7 @@ class StudentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Student $student)
+    public function edit(string $id)
     {
         //
     }
@@ -50,7 +53,7 @@ class StudentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Student $student)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -58,7 +61,7 @@ class StudentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Student $student)
+    public function destroy(string $id)
     {
         //
     }

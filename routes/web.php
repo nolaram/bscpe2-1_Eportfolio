@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Adviser\DashboardController as AdviserDashboardController;
 use App\Http\Controllers\Student\DashboardController as StudentDashboardController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Admin\StudentController;
 
 // Route::get('/', function () {
 //     return redirect()->route('login');
@@ -43,6 +44,14 @@ Route::middleware(['auth', 'role:Admin'])
     ->group(function () {
         Route::get('/dashboard', [AdminDashboardController::class, 'index'])
             ->name('dashboard');
+
+        // Route::resource('students', StudentController::class);
+
+        Route::resource('students', StudentController::class)->only(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']);
+
+        // Route::get('/students', [StudentController::class, 'index'])
+        //     ->name('students.index');
+
     });
 
 // Route::middleware('auth')
