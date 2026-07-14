@@ -24,6 +24,21 @@ Route::get('/', function () {
     };
 });
 
+Route::get('/dashboard', function () {
+
+    if (! Auth::check()) {
+        return redirect()->route('login');
+    }
+
+    return match (Auth::user()->role->name) {
+        'Admin'   => redirect()->route('admin.dashboard'),
+        'Adviser' => redirect()->route('adviser.dashboard'),
+        'Student' => redirect()->route('student.dashboard'),
+        default   => abort(403),
+    };
+
+})->middleware('auth')->name('dashboard');
+
 // Home page
 // Route::get('/', function () {
 //     return 'Home';

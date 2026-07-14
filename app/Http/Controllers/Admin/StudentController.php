@@ -5,15 +5,21 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Student;
+use App\Services\StudentService;
+use App\Http\Requests\StoreStudentRequest;
 
 class StudentController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+    public function __construct(
+        protected StudentService $studentService
+    ) {}
+
     public function index()
     {
-        $students = Student::with('user')->orderBy('student_number')->get();
+        $students = $this->studentService->getAllStudents();
 
         return view('admin.students.index', compact('students'));
     }
@@ -29,9 +35,27 @@ class StudentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreStudentRequest $request)
     {
-        //
+        try {
+
+            $this->studentService->createStudent(
+                $request->validated()
+            );
+
+            return redirect()
+                ->route('admin.students.index')
+                ->with('success', 'Student created successfully.');
+
+        } catch (\Throwable $e) {
+
+            report($e);
+
+            return back()
+                ->withInput()
+                ->with('error', 'Unable to create student.');
+
+        }
     }
 
     /**

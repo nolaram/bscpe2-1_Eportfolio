@@ -41,12 +41,7 @@ class AuthenticatedSessionController extends Controller
 
         $user = Auth::user();
 
-        return match ($user->role->name) {
-            'Admin' => redirect()->route('admin.dashboard'),
-            'Adviser' => redirect()->route('adviser.dashboard'),
-            'Student' => redirect()->route('student.dashboard'),
-            default => abort(403),
-        };
+        return redirect()->route('dashboard');
     }
 
     // public function store(LoginRequest $request): RedirectResponse

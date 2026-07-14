@@ -1,76 +1,60 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>Admin Dashboard</title>
-</head>
-<body>
+<x-app-layout>
 
-<h1>Student Management</h1>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            Student Management
+        </h2>
+    </x-slot>
 
-<a href="{{ route('admin.students.create') }}">
-    Add Student
-</a>
+    <div class="p-6">
 
-<table border="1" cellpadding="10">
-    <thead>
-        <tr>
-            <th>Student Number</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
+        <a href="{{ route('admin.students.create') }}">
+            Add Student
+        </a>
 
-    <tbody>
+        <br><br>
 
-    @forelse($students as $student)
+        <table border="1" cellpadding="10">
 
-        <tr>
-            <td>{{ $student->student_number }}</td>
-            <td>{{ $student->user->name }}</td>
-            <td>{{ $student->user->email }}</td>
+            <thead>
+                <tr>
+                    <th>Student No.</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
 
-            <td>
+            <tbody>
 
-                <a href="{{ route('admin.students.edit', $student) }}">
-                    Edit
-                </a>
+            @forelse($students as $student)
 
-                |
+                <tr>
+                    <td>{{ $student->student_number }}</td>
 
-                <form
-                    action="{{ route('admin.students.destroy', $student) }}"
-                    method="POST"
-                    style="display:inline;"
-                >
-                    @csrf
-                    @method('DELETE')
+                    <td>
+                        {{ $student->first_name }}
+                        {{ $student->last_name }}
+                    </td>
 
-                    <button type="submit">
-                        Delete
-                    </button>
+                    <td>
+                        {{ $student->user->email }}
+                    </td>
+                </tr>
 
-                </form>
+            @empty
 
-            </td>
+                <tr>
+                    <td colspan="3">
+                        No students found.
+                    </td>
+                </tr>
 
-        </tr>
+            @endforelse
 
-    @empty
+            </tbody>
 
-        <tr>
+        </table>
 
-            <td colspan="4">
-                No students found.
-            </td>
+    </div>
 
-        </tr>
-
-    @endforelse
-
-    </tbody>
-
-</table>
-
-</body>
-</html>
+</x-app-layout>
