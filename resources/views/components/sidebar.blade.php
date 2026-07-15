@@ -37,7 +37,7 @@
         >
 
             <img 
-                src="{{ asset('images/pup-logo.webp') }}"
+                src="{{ asset('images/pup_logo.webp') }}"
                 alt="PUP Logo"
                 class="h-10 w-10"
             >
@@ -104,17 +104,20 @@
     {{-- Bottom --}}
     <div class="border-t border-white/20 p-3">
 
-        <button
-            class="flex w-full items-center gap-3 rounded-lg px-3 py-3 hover:bg-primary-dark transition"
-        >
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
 
-            <x-heroicon-o-arrow-right-on-rectangle class="h-6 w-6 flex-shrink-0" />
+            <button
+                type="submit"
+                class="flex w-full items-center gap-3 rounded-lg px-3 py-3 hover:bg-primary-dark transition"
+            >
+                <x-heroicon-o-arrow-right-on-rectangle class="h-6 w-6 flex-shrink-0" />
 
-            <span x-show="sidebarOpen">
-                Logout
-            </span>
-
-        </button>
+                <span x-show="sidebarOpen">
+                    Logout
+                </span>
+            </button>
+        </form>
 
     </div>
 

@@ -1,10 +1,11 @@
 @props([
     'title',
     'value',
-    'icon' => '📊',
+    'icon'
 ])
 
-<div class="rounded-xl bg-white p-6 shadow-sm border border-gray-200 hover:shadow-md transition">
+<div class="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
+
     <div class="flex items-center justify-between">
 
         <div>
@@ -12,14 +13,17 @@
                 {{ $title }}
             </p>
 
-            <h2 class="mt-2 text-3xl font-bold text-gray-800">
+            <h3 class="mt-2 text-3xl font-bold text-gray-800">
                 {{ $value }}
-            </h2>
+            </h3>
         </div>
 
-        <div class="text-3xl">
-            {{ $icon }}
-        </div>
+        @if($icon)
+            <div class="text-3xl">
+                {{ $icon }}
+            </div>
+        @endif
 
     </div>
+
 </div>

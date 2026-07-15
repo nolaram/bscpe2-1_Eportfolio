@@ -14,17 +14,21 @@ return new class extends Migration
         Schema::create('advisers', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('role_id')
-                    ->constrained()
-                    ->cascadeOnUpdate()
-                    ->restrictOnDelete();
+            // $table->foreignId('role_id')
+            //         ->constrained()
+            //         ->cascadeOnUpdate()
+            //         ->restrictOnDelete();
 
             $table->foreignId('adviser_id')
                     ->nullable()
                     ->constrained()
                     ->cascadeOnUpdate()
-                    ->nullOnDelete();   
+                    ->nullOnDelete();
                     
+            $table->foreignId('user_id')
+                    ->constrained()
+                    ->cascadeOnDelete();
+
             $table->string('first_name');
             $table->string('middle_name')->nullable();
             $table->string('last_name');
