@@ -3,11 +3,13 @@
     {{-- Welcome Section --}}
     <div>
         <h1 class="text-3xl font-bold text-gray-800">
-            Welcome.
+            Welcome, {{ $student->first_name }}!
         </h1>
 
         <p class="mt-2 text-gray-500">
-            Here's an overview of your internship progress.
+            Assigned Adviser:
+            {{ $student->adviser?->first_name }}
+            {{ $student->adviser?->last_name ?? 'Not Assigned' }}
         </p>
     </div>
 

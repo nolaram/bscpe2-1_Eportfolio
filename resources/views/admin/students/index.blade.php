@@ -63,6 +63,10 @@
 
                         </form>
 
+                        <a href="{{ route('admin.students.assign-adviser', $student) }}">
+                            Assign Adviser
+                        </a>
+
                     </td>
 
                 </tr>

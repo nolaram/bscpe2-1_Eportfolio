@@ -8,6 +8,7 @@ use App\Models\Student;
 use App\Services\StudentService;
 use App\Http\Requests\StoreStudentRequest;
 use App\Http\Requests\UpdateStudentRequest;
+use App\Models\Adviser;
 
 class StudentController extends Controller
 {
@@ -124,4 +125,46 @@ class StudentController extends Controller
             ->route('admin.students.index')
             ->with('success', 'Student deleted successfully.');
     }
+
+    public function assignAdviserForm(Student $student)
+    {
+        $advisers = Adviser::orderBy('last_name')->get();
+
+        return view(
+            'admin.students.assign-adviser',
+            compact('student', 'advisers')
+        );
+    }
+
+    public function assignAdviser(
+        Request $request,
+        Student $student
+    )
+    {
+        $validated = $request->validate([
+
+            'adviser_id' => [
+                'required',
+                'exists:advisers,id',
+            ],
+
+        ]);
+
+        $adviser = Adviser::findOrFail(
+            $validated['adviser_id']
+        );
+
+        $this->studentService->assignAdviser(
+            $student,
+            $adviser
+        );
+
+        return redirect()
+            ->route('admin.students.index')
+            ->with(
+                'success',
+                'Adviser assigned successfully.'
+            );
+    }
+
 }

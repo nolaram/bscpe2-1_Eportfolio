@@ -8,9 +8,9 @@
 
 <div class="space-y-6">
 
-    @include('student.partials.welcome')
-    @include('student.partials.stats')
-    @include('student.partials.progress')
+    @include('student.partials.welcome', ['student' => $student])
+    @include('student.partials.stats', ['student' => $student])
+    @include('student.partials.progress', ['student' => $student])
 
 </div>
 

@@ -4,11 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Models\Adviser;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\DailyAttendance;
 
 class Student extends Model
 {
     protected $fillable = [
         'user_id',
+        'adviser_id',
         'student_number',
         'first_name',
         'middle_name',
@@ -32,5 +36,10 @@ class Student extends Model
     {
         return $this->belongsTo(Adviser::class);
     }
-   
+
+    public function dailyAttendances(): HasMany
+    {
+        return $this->hasMany(DailyAttendance::class);
+    }
+    
 }

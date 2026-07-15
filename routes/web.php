@@ -70,6 +70,16 @@ Route::middleware(['auth', 'role:Admin'])
 
         Route::resource('advisers', AdviserController::class);
 
+        Route::get(
+            'students/{student}/assign-adviser',
+            [StudentController::class, 'assignAdviserForm']
+        )->name('students.assign-adviser');
+
+        Route::put(
+            'students/{student}/assign-adviser',
+            [StudentController::class, 'assignAdviser']
+        )->name('students.assign-adviser.update');
+
     });
 
 // Route::middleware('auth')
@@ -94,6 +104,11 @@ Route::middleware(['auth', 'role:Student'])
     ->group(function () {
         Route::get('/dashboard', [StudentDashboardController::class, 'index'])
             ->name('dashboard');
+
+        Route::resource(
+                'daily-attendances',
+                \App\Http\Controllers\Student\DailyAttendanceController::class
+            )->names('student.daily-attendances');
     });
 
 // Load Breeze authentication routes

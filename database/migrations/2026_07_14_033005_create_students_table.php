@@ -18,12 +18,6 @@ return new class extends Migration
             //         ->constrained()
             //         ->cascadeOnUpdate()
             //         ->restrictOnDelete();
-
-            // $table->foreignId('adviser_id')
-            //         ->nullable()
-            //         ->constrained()
-            //         ->cascadeOnUpdate()
-            //         ->nullOnDelete();
             
             $table->foreignId('user_id')
                     ->constrained()

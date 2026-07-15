@@ -7,6 +7,7 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 use App\Models\Role;
 use App\Services\UserService;
+use App\Models\Adviser;
 
 class StudentService
 {   
@@ -85,5 +86,27 @@ class StudentService
             $this->userService->deleteUser($user);
 
         });
+    }
+
+    public function assignAdviser(
+        Student $student,
+        Adviser $adviser
+    ): Student
+    {
+        $student->update([
+            'adviser_id' => $adviser->id,
+        ]);
+
+        return $student->fresh('adviser');
+    }
+
+    public function getStudentByUserId(int $userId): Student
+    {
+        return Student::with([
+            'user',
+            'adviser',
+        ])
+        ->where('user_id', $userId)
+        ->firstOrFail();
     }
 }

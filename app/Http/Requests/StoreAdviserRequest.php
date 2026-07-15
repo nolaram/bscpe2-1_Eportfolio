@@ -23,7 +23,19 @@ class StoreAdviserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'first_name' => 'required|string|max:100',
+
+            'middle_name' => 'nullable|string|max:100',
+
+            'last_name' => 'required|string|max:100',
+
+            'department' => 'nullable|string|max:255',
+
+            'contact_number' => 'nullable|string|max:20',
+
+            'email' => 'required|email|unique:users,email',
+
+            'password' => 'required|string|min:8|confirmed',
         ];
     }
 }

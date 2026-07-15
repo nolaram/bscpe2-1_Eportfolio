@@ -14,7 +14,7 @@
 
             <br>
 
-            <a href="#">
+            <a href="{{ route('admin.advisers.index') }}">
                 Manage Advisers
             </a>
 

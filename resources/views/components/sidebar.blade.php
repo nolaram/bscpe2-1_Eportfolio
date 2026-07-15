@@ -49,7 +49,7 @@
     {{-- Navigation --}}
     <nav class="flex-1 px-3 py-6 space-y-2">
 
-        <a href="#" class="flex items-center gap-3 rounded-lg px-3 py-3 hover:bg-primary-dark transition">
+        <a href="{{ route('student.dashboard') }}" class="flex items-center gap-3 rounded-lg px-3 py-3 hover:bg-primary-dark transition">
 
             <x-heroicon-o-home class="h-6 w-6 flex-shrink-0" />
 
@@ -59,7 +59,7 @@
 
         </a>
 
-        <a href="#" class="flex items-center gap-3 rounded-lg px-3 py-3 hover:bg-primary-dark transition">
+        <a href="" class="flex items-center gap-3 rounded-lg px-3 py-3 hover:bg-primary-dark transition">
 
             <x-heroicon-o-user-circle class="h-6 w-6 flex-shrink-0" />
 
@@ -69,7 +69,7 @@
 
         </a>
 
-        <a href="#" class="flex items-center gap-3 rounded-lg px-3 py-3 hover:bg-primary-dark transition">
+        <a href="{{ route('student.student.daily-attendances.index') }}" class="flex items-center gap-3 rounded-lg px-3 py-3 hover:bg-primary-dark transition">
 
             <x-heroicon-o-clipboard-document-list class="h-6 w-6 flex-shrink-0" />
 
@@ -79,7 +79,7 @@
 
         </a>
 
-        <a href="#" class="flex items-center gap-3 rounded-lg px-3 py-3 hover:bg-primary-dark transition">
+        <a href="" class="flex items-center gap-3 rounded-lg px-3 py-3 hover:bg-primary-dark transition">
 
             <x-heroicon-o-calendar-days class="h-6 w-6 flex-shrink-0" />
 
@@ -89,7 +89,7 @@
 
         </a>
 
-        <a href="#" class="flex items-center gap-3 rounded-lg px-3 py-3 hover:bg-primary-dark transition">
+        <a href="" class="flex items-center gap-3 rounded-lg px-3 py-3 hover:bg-primary-dark transition">
 
             <x-heroicon-o-folder class="h-6 w-6 flex-shrink-0" />
 
