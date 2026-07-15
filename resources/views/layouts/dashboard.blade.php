@@ -4,22 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>@yield('title', 'BSCpE 2-1 OJT E-Portfolio')</title>
+    <title>@yield('title', 'PUP OJT E-Portfolio')</title>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="bg-gray-100">
+<body
+    class="bg-background overflow-hidden"
+    x-data="{ sidebarOpen: true }"
+>
 
-    @include('components.navbar')
+    <div class="flex h-screen">
 
-    <div class="flex">
-
+        {{-- Sidebar --}}
         @include('components.sidebar')
 
-        <main class="flex-1 p-6">
-            @yield('content')
-        </main>
+        {{-- Main Content --}}
+        <div class="flex flex-1 flex-col overflow-hidden">
+
+            {{-- Navbar --}}
+            @include('components.navbar')
+
+            {{-- Page Content --}}
+            <main class="flex-1 overflow-y-auto p-6">
+
+                @yield('content')
+
+            </main>
+
+        </div>
 
     </div>
 

@@ -34,5 +34,10 @@ Route::middleware(['auth', 'role:Student'])
             ->name('dashboard');
     });
 
+// Temporary UI preview route (remove before production)
+Route::get('/ui-preview', function () {
+    return view('student.dashboard');
+});
+
 // Load Breeze authentication routes
 require __DIR__.'/auth.php';

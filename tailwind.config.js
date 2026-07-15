@@ -10,7 +10,14 @@ export default {
     ],
 
     theme: {
-        extend: {
+    extend: {
+        colors: {
+            primary: '#800000',      // PUP Maroon
+            'primary-dark': '#660000',
+            accent: '#FFC72C',       // Gold
+            background: '#F3F4F6',
+            surface: '#FFFFFF',
+        },
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
