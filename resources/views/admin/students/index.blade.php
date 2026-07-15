@@ -21,6 +21,7 @@
                     <th>Student No.</th>
                     <th>Name</th>
                     <th>Email</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
 
@@ -39,6 +40,31 @@
                     <td>
                         {{ $student->user->email }}
                     </td>
+
+                    <td>
+
+                        <a href="{{ route('admin.students.edit', $student) }}">
+                            Edit
+                        </a>
+
+                        <form
+                            action="{{ route('admin.students.destroy', $student) }}"
+                            method="POST"
+                            style="display:inline;"
+                        >
+                            @csrf
+                            @method('DELETE')
+
+                            <button
+                                onclick="return confirm('Delete this student?')"
+                            >
+                                Delete
+                            </button>
+
+                        </form>
+
+                    </td>
+
                 </tr>
 
             @empty
@@ -52,7 +78,7 @@
             @endforelse
 
             </tbody>
-
+        
         </table>
 
     </div>

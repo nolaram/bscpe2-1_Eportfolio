@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Student;
 use App\Services\StudentService;
 use App\Http\Requests\StoreStudentRequest;
+use App\Http\Requests\UpdateStudentRequest;
 
 class StudentController extends Controller
 {
@@ -37,6 +38,8 @@ class StudentController extends Controller
      */
     public function store(StoreStudentRequest $request)
     {
+        // dd('Store Reached');
+
         try {
 
             $this->studentService->createStudent(
@@ -48,6 +51,8 @@ class StudentController extends Controller
                 ->with('success', 'Student created successfully.');
 
         } catch (\Throwable $e) {
+
+            // dd($e->getMessage());
 
             report($e);
 
@@ -69,24 +74,54 @@ class StudentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Student $student)
     {
-        //
+        return view(
+            'admin.students.edit',
+            compact('student')
+        );
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(
+        UpdateStudentRequest $request,
+        Student $student
+    )
     {
-        //
+        $this->studentService->updateStudent(
+            $student,
+            $request->validated()
+        );
+
+        return redirect()
+            ->route('admin.students.index')
+            ->with('success', 'Student updated successfully.');
     }
+
+    // public function update(
+    //     UpdateStudentRequest $request,
+    //     Student $student
+    // )
+    // {
+    //     dd($request->validated());
+
+    //     $this->studentService->updateStudent(
+    //         $student,
+    //         $request->validated()
+    //     );
+    // }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Student $student)
     {
-        //
+        $this->studentService->deleteStudent($student);
+
+        return redirect()
+            ->route('admin.students.index')
+            ->with('success', 'Student deleted successfully.');
     }
 }

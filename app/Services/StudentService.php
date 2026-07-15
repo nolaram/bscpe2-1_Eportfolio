@@ -3,10 +3,8 @@
 namespace App\Services;
 
 use App\Models\Student;
-use App\Models\User;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 use App\Models\Role;
 use App\Services\UserService;
 
@@ -34,7 +32,7 @@ class StudentService
             $studentRole = Role::where('name', 'Student')
                 ->firstOrFail();
 
-            $user = $this->userService->create([
+            $user = $this->userService->createUser([
             'role' => 'Student',
             'name' => $data['first_name'].' '.$data['last_name'],
             'email' => $data['email'],
@@ -48,6 +46,43 @@ class StudentService
                 'first_name' => $data['first_name'],
                 'last_name' => $data['last_name'],
             ]);
+
+        });
+    }
+
+    public function updateStudent(Student $student, array $data): Student
+    {
+        return DB::transaction(function () use ($student, $data) {
+
+            $this->userService->updateUser(
+                $student->user,
+                $data
+            );
+
+            $student->update([
+
+                'student_number' => $data['student_number'],
+
+                'first_name' => $data['first_name'],
+
+                'last_name' => $data['last_name'],
+
+            ]);
+
+            return $student->fresh('user');
+
+        });
+    }
+
+    public function deleteStudent(Student $student): void
+    {
+        DB::transaction(function () use ($student) {
+
+            $user = $student->user;
+
+            $student->delete();
+
+            $this->userService->deleteUser($user);
 
         });
     }

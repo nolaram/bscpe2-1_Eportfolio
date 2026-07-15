@@ -6,6 +6,7 @@ use App\Http\Controllers\Adviser\DashboardController as AdviserDashboardControll
 use App\Http\Controllers\Student\DashboardController as StudentDashboardController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Admin\StudentController;
+use App\Http\Controllers\Admin\AdviserController;
 
 // Route::get('/', function () {
 //     return redirect()->route('login');
@@ -66,6 +67,8 @@ Route::middleware(['auth', 'role:Admin'])
 
         // Route::get('/students', [StudentController::class, 'index'])
         //     ->name('students.index');
+
+        Route::resource('advisers', AdviserController::class);
 
     });
 
