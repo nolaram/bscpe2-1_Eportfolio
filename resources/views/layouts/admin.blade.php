@@ -1,82 +1,58 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-
 <head>
 
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <meta name="csrf-token"
-          content="{{ csrf_token() }}">
+    <meta
+        name="csrf-token"
+        content="{{ csrf_token() }}"
+    >
 
-    <title>{{ config('app.name') }}</title>
+    <title>
 
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+        @yield('title', 'OJT E-Portfolio')
+
+    </title>
+
+    @vite([
+        'resources/css/app.css',
+        'resources/js/app.js'
+    ])
 
 </head>
 
-<body class="bg-gray-100 font-sans antialiased">
+<body
+    class="bg-background overflow-hidden"
+    x-data="{ sidebarOpen: true }"
+>
 
-<div class="flex min-h-screen">
+    <div class="flex h-screen">
 
-    {{-- Sidebar --}}
-    <aside
-        class="w-64 bg-white border-r border-gray-200">
+        {{-- Sidebar --}}
+        @include('components.sidebar')
 
-        <div class="h-16 flex items-center px-6 border-b">
+        {{-- Main Content --}}
+        <div class="flex flex-1 flex-col overflow-hidden">
 
-            <h1 class="text-xl font-bold text-primary">
+            {{-- Navbar --}}
+            @include('components.navbar')
 
-                OJT E-Portfolio
+            {{-- Page --}}
+            <main class="flex-1 overflow-y-auto p-6">
 
-            </h1>
+                @yield('content')
+
+            </main>
 
         </div>
 
-        <nav class="p-4 space-y-2">
-
-            {{ $sidebar }}
-
-        </nav>
-
-    </aside>
-
-    {{-- Main --}}
-    <div class="flex-1 flex flex-col">
-
-        {{-- Topbar --}}
-        <header
-            class="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-8">
-
-            <h2
-                class="text-lg font-semibold text-gray-800">
-
-                {{ $title }}
-
-            </h2>
-
-            <div
-                class="text-sm text-gray-500">
-
-                {{ Auth::user()->first_name ?? Auth::user()->name }}
-
-            </div>
-
-        </header>
-
-        {{-- Content --}}
-        <main
-            class="flex-1 p-8">
-
-            {{ $slot }}
-
-        </main>
-
     </div>
-
-</div>
 
 </body>
 

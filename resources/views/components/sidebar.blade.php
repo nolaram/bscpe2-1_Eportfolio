@@ -6,26 +6,48 @@
     {{-- Logo --}}
     <div class="h-20 flex items-center justify-center border-b border-white/20">
 
-        <div 
-            x-show="sidebarOpen" 
+        <div
+            x-show="sidebarOpen"
             x-transition
             class="flex items-center gap-3"
         >
 
-            <img 
+            <img
                 src="{{ asset('images/pup_logo.webp') }}"
                 alt="PUP Logo"
-                class="h-12 w-12"
+                class="h-12 w-12 flex-shrink-0"
             >
 
-            <div>
-                <h1 class="font-bold text-lg">
+            <div class="leading-tight">
+
+                <h1 class="text-lg font-bold tracking-tight">
                     OJT E-Portfolio
                 </h1>
 
-                <p class="text-xs text-gray-200">
-                    Student Portal
+                <p class="text-xs text-white/70">
+                    Computer Engineering
                 </p>
+
+                <div class="mt-2 h-px w-full bg-white/20"></div>
+
+                <p class="mt-2 text-[11px] font-semibold uppercase tracking-widest text-white/80">
+
+                    @if(Auth::user()->role->name === 'Admin')
+
+                        Admin Portal
+
+                    @elseif(Auth::user()->role->name === 'Adviser')
+
+                        Adviser Portal
+
+                    @else
+
+                        Student Portal
+
+                    @endif
+
+                </p>
+
             </div>
 
         </div>
@@ -39,7 +61,7 @@
             <img 
                 src="{{ asset('images/pup_logo.webp') }}"
                 alt="PUP Logo"
-                class="h-10 w-10"
+                class="h-11 w-11"
             >
 
         </div>
@@ -49,55 +71,232 @@
     {{-- Navigation --}}
     <nav class="flex-1 px-3 py-6 space-y-2">
 
-        <a href="{{ route('student.dashboard') }}" class="flex items-center gap-3 rounded-lg px-3 py-3 hover:bg-primary-dark transition">
+        @if(Auth::user()->role->name === 'Admin')
 
-            <x-heroicon-o-home class="h-6 w-6 flex-shrink-0" />
+            {{-- Admin Navigation --}}
 
-            <span x-show="sidebarOpen">
-                Dashboard
-            </span>
+            <p class="px-3 mb-3 text-xs font-semibold uppercase tracking-wider text-gray-200">
+                Main
+            </p>
 
-        </a>
+            <a 
+                href="{{ route('admin.dashboard') }}"
+                class="
+                    flex items-center gap-3 rounded-lg px-3 py-3
+                    transition hover:translate-x-1 hover:bg-primary-dark
+                    {{ request()->routeIs('admin.dashboard') ? 'bg-white/20' : '' }}
+                "
+            >
 
-        <a href="" class="flex items-center gap-3 rounded-lg px-3 py-3 hover:bg-primary-dark transition">
+                <x-heroicon-o-home class="h-6 w-6 flex-shrink-0" />
 
-            <x-heroicon-o-user-circle class="h-6 w-6 flex-shrink-0" />
+                <span x-show="sidebarOpen">
+                    Dashboard
+                </span>
 
-            <span x-show="sidebarOpen">
-                Profile
-            </span>
+            </a>
 
-        </a>
 
-        <a href="{{ route('student.student.daily-attendances.index') }}" class="flex items-center gap-3 rounded-lg px-3 py-3 hover:bg-primary-dark transition">
+            <p class="px-3 mt-6 mb-3 text-xs font-semibold uppercase tracking-wider text-gray-200">
+                Management
+            </p>
 
-            <x-heroicon-o-clipboard-document-list class="h-6 w-6 flex-shrink-0" />
 
-            <span x-show="sidebarOpen">
-                Daily Logs
-            </span>
+            <a 
+                href="{{ route('admin.students.index') }}"
+                class="
+                    flex items-center gap-3 rounded-lg px-3 py-3
+                    transition hover:translate-x-1 hover:bg-primary-dark
+                    {{ request()->routeIs('admin.students.*') ? 'bg-white/20' : '' }}
+                "
+            >
 
-        </a>
+                <x-heroicon-o-user-group class="h-6 w-6 flex-shrink-0" />
 
-        <a href="" class="flex items-center gap-3 rounded-lg px-3 py-3 hover:bg-primary-dark transition">
+                <span x-show="sidebarOpen">
+                    Students
+                </span>
 
-            <x-heroicon-o-calendar-days class="h-6 w-6 flex-shrink-0" />
+            </a>
 
-            <span x-show="sidebarOpen">
-                Weekly Reports
-            </span>
 
-        </a>
+            <a 
+                href="{{ route('admin.advisers.index') }}"
+                class="
+                    flex items-center gap-3 rounded-lg px-3 py-3
+                    transition hover:translate-x-1 hover:bg-primary-dark
+                    {{ request()->routeIs('admin.advisers.*') ? 'bg-white/20' : '' }}
+                "
+            >
 
-        <a href="" class="flex items-center gap-3 rounded-lg px-3 py-3 hover:bg-primary-dark transition">
+                <x-heroicon-o-academic-cap class="h-6 w-6 flex-shrink-0" />
 
-            <x-heroicon-o-folder class="h-6 w-6 flex-shrink-0" />
+                <span x-show="sidebarOpen">
+                    Advisers
+                </span>
 
-            <span x-show="sidebarOpen">
-                Documents
-            </span>
+            </a>
 
-        </a>
+
+
+        @elseif(Auth::user()->role->name === 'Adviser')
+
+            {{-- Adviser Navigation --}}
+
+            <p class="px-3 mb-3 text-xs font-semibold uppercase tracking-wider text-gray-200">
+                Main
+            </p>
+
+
+            <a 
+                href="{{ route('adviser.dashboard') }}"
+                class="
+                    flex items-center gap-3 rounded-lg px-3 py-3
+                    transition hover:translate-x-1 hover:bg-primary-dark
+                    {{ request()->routeIs('adviser.dashboard') ? 'bg-white/20' : '' }}
+                "
+            >
+
+                <x-heroicon-o-home class="h-6 w-6 flex-shrink-0" />
+
+                <span x-show="sidebarOpen">
+                    Dashboard
+                </span>
+
+            </a>
+
+
+            <p class="px-3 mt-6 mb-3 text-xs font-semibold uppercase tracking-wider text-gray-200">
+                Management
+            </p>
+
+
+            <a 
+                href="{{ route('adviser.students.index') }}"
+                class="
+                    flex items-center gap-3 rounded-lg px-3 py-3
+                    transition hover:translate-x-1 hover:bg-primary-dark
+                "
+            >
+
+                <x-heroicon-o-user-group class="h-6 w-6 flex-shrink-0" />
+
+                <span x-show="sidebarOpen">
+                    Assigned Students
+                </span>
+
+            </a>
+
+
+
+        @elseif(Auth::user()->role->name === 'Student')
+
+            {{-- Student Navigation --}}
+            {{-- KEEPING ALL ORIGINAL FEATURES --}}
+
+
+            <p class="px-3 mb-3 text-xs font-semibold uppercase tracking-wider text-gray-200">
+                Main
+            </p>
+
+
+            <a 
+                href="{{ route('student.dashboard') }}"
+                class="
+                    flex items-center gap-3 rounded-lg px-3 py-3
+                    transition hover:translate-x-1 hover:bg-primary-dark
+                    {{ request()->routeIs('student.dashboard') ? 'bg-white/20' : '' }}
+                "
+            >
+
+                <x-heroicon-o-home class="h-6 w-6 flex-shrink-0" />
+
+                <span x-show="sidebarOpen">
+                    Dashboard
+                </span>
+
+            </a>
+
+
+            <p class="px-3 mt-6 mb-3 text-xs font-semibold uppercase tracking-wider text-gray-200">
+                OJT Management
+            </p>
+
+
+            {{-- Profile --}}
+            <a 
+                href=""
+                class="
+                    flex items-center gap-3 rounded-lg px-3 py-3
+                    transition hover:translate-x-1 hover:bg-primary-dark
+                "
+            >
+
+                <x-heroicon-o-user-circle class="h-6 w-6 flex-shrink-0" />
+
+                <span x-show="sidebarOpen">
+                    Profile
+                </span>
+
+            </a>
+
+
+            {{-- Daily Logs --}}
+            <a 
+                href="{{ route('student.student.daily-attendances.index') }}"
+                class="
+                    flex items-center gap-3 rounded-lg px-3 py-3
+                    transition hover:translate-x-1 hover:bg-primary-dark
+                    {{ request()->routeIs('student.student.daily-attendances.*') ? 'bg-white/20' : '' }}
+                "
+            >
+
+                <x-heroicon-o-clipboard-document-list class="h-6 w-6 flex-shrink-0" />
+
+                <span x-show="sidebarOpen">
+                    Daily Logs
+                </span>
+
+            </a>
+
+
+            {{-- Weekly Reports --}}
+            <a 
+                href=""
+                class="
+                    flex items-center gap-3 rounded-lg px-3 py-3
+                    transition hover:translate-x-1 hover:bg-primary-dark
+                "
+            >
+
+                <x-heroicon-o-calendar-days class="h-6 w-6 flex-shrink-0" />
+
+                <span x-show="sidebarOpen">
+                    Weekly Reports
+                </span>
+
+            </a>
+
+
+            {{-- Documents --}}
+            <a 
+                href=""
+                class="
+                    flex items-center gap-3 rounded-lg px-3 py-3
+                    transition hover:translate-x-1 hover:bg-primary-dark
+                "
+            >
+
+                <x-heroicon-o-folder class="h-6 w-6 flex-shrink-0" />
+
+                <span x-show="sidebarOpen">
+                    Documents
+                </span>
+
+            </a>
+
+
+        @endif
 
     </nav>
 

@@ -1,125 +1,239 @@
 <x-app-layout>
 
-<div class="p-6">
+    <div class="p-8">
 
-    <h1>Daily Attendance</h1>
+        {{-- Header --}}
+        <div class="mb-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
 
-    <br>
+            <div>
 
-    <a href="{{ route('student.student.daily-attendances.create') }}">
+                <h1 class="text-3xl font-bold text-gray-900">
+                    Daily Attendance
+                </h1>
 
-        Add Attendance
+                <p class="mt-2 text-sm text-gray-500">
+                    Track and manage your daily OJT attendance records.
+                </p>
 
-    </a>
+            </div>
 
-    <br><br>
 
-    <table border="1" cellpadding="10">
+            <a
+                href="{{ route('student.student.daily-attendances.create') }}"
+                class="inline-flex items-center justify-center gap-2
+                       rounded-lg bg-primary px-5 py-2.5
+                       text-sm font-medium text-white
+                       shadow-sm transition hover:opacity-90"
+            >
 
-        <thead>
+                <x-heroicon-o-plus class="h-5 w-5"/>
 
-            <tr>
+                Add Attendance
 
-                <th>Date</th>
+            </a>
 
-                <th>Time In</th>
 
-                <th>Time Out</th>
+        </div>
 
-                <th>Lunch Break</th>
 
-                <th>Hours</th>
 
-                <th>Status</th>
+        {{-- Attendance Table --}}
+        <div class="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
 
-                <th>Actions</th>
+            <div class="overflow-x-auto">
 
-            </tr>
+                <table class="w-full">
 
-        </thead>
 
-        <tbody>
+                    <thead class="bg-gray-50">
 
-        @forelse($attendances as $attendance)
+                        <tr>
 
-            <tr>
+                            <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">
+                                Date
+                            </th>
 
-                <td>{{ $attendance->attendance_date }}</td>
+                            <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">
+                                Time In
+                            </th>
 
-                <td>{{ $attendance->time_in }}</td>
+                            <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">
+                                Time Out
+                            </th>
 
-                <td>{{ $attendance->time_out }}</td>
+                            <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">
+                                Hours
+                            </th>
 
-                <td>
+                            <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">
+                                Status
+                            </th>
 
-                    {{ $attendance->has_lunch_break ? 'Yes' : 'No' }}
+                            <th class="px-6 py-3 text-center text-xs font-semibold uppercase tracking-wide text-gray-500">
+                                Actions
+                            </th>
 
-                </td>
+                        </tr>
 
-                <td>{{ $attendance->hours_rendered }}</td>
+                    </thead>
 
-                <td>{{ $attendance->status }}</td>
 
-                <td>
+                    <tbody class="divide-y divide-gray-100">
 
-                    <a
-                        href="{{ route(
-                            'student.student.daily-attendances.edit',
-                            $attendance
-                        ) }}"
-                    >
-                        Edit
-                    </a>
 
-                    |
+                    @forelse($attendances as $attendance)
 
-                    <form
-                        action="{{ route(
-                            'student.student.daily-attendances.destroy',
-                            $attendance
-                        ) }}"
-                        method="POST"
-                        style="display:inline;"
-                    >
 
-                        @csrf
-                        @method('DELETE')
+                        <tr class="transition hover:bg-gray-50">
 
-                        <button
-                            type="submit"
-                            onclick="return confirm('Delete this attendance?')"
-                        >
-                            Delete
-                        </button>
 
-                    </form>
+                            <td class="px-6 py-4 text-sm text-gray-700">
+                                {{ $attendance->attendance_date }}
+                            </td>
 
-                </td>
 
-            </tr>
+                            <td class="px-6 py-4 text-sm text-gray-700">
+                                {{ $attendance->time_in }}
+                            </td>
 
-        @empty
 
-            <tr>
+                            <td class="px-6 py-4 text-sm text-gray-700">
+                                {{ $attendance->time_out }}
+                            </td>
 
-                <td colspan="7">
 
-                    No attendance records.
+                            <td class="px-6 py-4 text-sm text-gray-700">
+                                {{ $attendance->hours_rendered }}
+                            </td>
 
-                </td>
 
-            </tr>
+                            <td class="px-6 py-4">
 
-        @endforelse
+                                <span class="rounded-full bg-yellow-50 px-3 py-1 text-xs font-medium text-yellow-700">
 
-        </tbody>
+                                    {{ $attendance->status }}
 
-    </table>
+                                </span>
 
-    <br>
+                            </td>
 
-    {{ $attendances->links() }}
 
-</div>
+
+                            <td class="px-6 py-4">
+
+
+                                @if($attendance->status === 'Pending')
+
+
+                                    <div class="flex justify-center gap-2">
+
+
+                                        <a
+                                            href="{{ route(
+                                                'student.student.daily-attendances.edit',
+                                                $attendance
+                                            ) }}"
+                                            class="inline-flex items-center gap-1 rounded-md
+                                                   border border-gray-300 px-3 py-1.5
+                                                   text-sm text-gray-700 transition
+                                                   hover:bg-gray-100"
+                                        >
+
+                                            <x-heroicon-o-pencil-square class="h-4 w-4"/>
+
+                                            Edit
+
+                                        </a>
+
+
+
+                                        <form
+                                            action="{{ route(
+                                                'student.student.daily-attendances.destroy',
+                                                $attendance
+                                            ) }}"
+                                            method="POST"
+                                        >
+
+                                            @csrf
+                                            @method('DELETE')
+
+
+                                            <button
+                                                type="submit"
+                                                onclick="return confirm('Delete this attendance?')"
+                                                class="inline-flex items-center gap-1 rounded-md
+                                                       border border-red-200 px-3 py-1.5
+                                                       text-sm text-red-600 transition
+                                                       hover:bg-red-50"
+                                            >
+
+                                                <x-heroicon-o-trash class="h-4 w-4"/>
+
+                                                Delete
+
+                                            </button>
+
+
+                                        </form>
+
+
+                                    </div>
+
+
+                                @else
+
+                                    <span class="text-sm text-gray-400">
+                                        Locked
+                                    </span>
+
+                                @endif
+
+
+                            </td>
+
+
+                        </tr>
+
+
+                    @empty
+
+
+                        <tr>
+
+                            <td
+                                colspan="6"
+                                class="px-6 py-12 text-center text-gray-500"
+                            >
+
+                                No attendance records found.
+
+                            </td>
+
+                        </tr>
+
+
+                    @endforelse
+
+
+                    </tbody>
+
+
+                </table>
+
+            </div>
+
+        </div>
+
+
+        <div class="mt-6">
+
+            {{ $attendances->links() }}
+
+        </div>
+
+
+    </div>
+
 
 </x-app-layout>

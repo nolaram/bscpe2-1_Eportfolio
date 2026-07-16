@@ -1,28 +1,32 @@
-@if ($errors->any())
+   @extends('layouts.admin')
 
-    <div class="mb-6 rounded-lg border border-red-200 bg-red-50 p-4">
+@section('title', 'Add Student')
 
-        <h3 class="font-semibold text-red-700">
-            Please fix the following errors:
-        </h3>
+@section('content')
 
-        <ul class="mt-2 list-disc list-inside text-sm text-red-600">
-
-            @foreach ($errors->all() as $error)
-
-                <li>{{ $error }}</li>
-
-            @endforeach
-
-        </ul>
-
-    </div>
-
-@endif
-
-<x-app-layout>
-
+    
     <div class="p-8">
+
+        @if ($errors->any())
+
+                <div class="mb-6 rounded-lg border border-red-200 bg-red-50 p-4">
+
+                    <h3 class="font-semibold text-red-700">
+                            Please fix the following errors:
+                    </h3>
+
+                    <ul class="mt-2 list-disc list-inside text-sm text-red-600">
+
+                        @foreach ($errors->all() as $error)
+
+                            <li>{{ $error }}</li>
+
+                        @endforeach
+
+                    </ul>
+
+                </div>
+        @endif
 
         {{-- Page Heading --}}
         <div class="mb-8">
@@ -189,4 +193,4 @@
 
     </div>
 
-</x-app-layout>
+@endsection
