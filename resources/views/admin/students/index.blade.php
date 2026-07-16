@@ -186,6 +186,20 @@
                                 <div class="flex justify-center gap-2">
 
                                     <a
+                                        href="{{ route('admin.students.show', $student) }}"
+                                        class="inline-flex items-center gap-1 rounded-md
+                                            border border-blue-200 px-3 py-1.5
+                                            text-sm text-blue-600 transition
+                                            hover:bg-blue-50"
+                                    >
+
+                                        <x-heroicon-o-eye class="h-4 w-4"/>
+
+                                        View
+
+                                    </a>
+
+                                    <a
                                         href="{{ route('admin.students.edit', $student) }}"
                                         class="inline-flex items-center gap-1 rounded-md
                                                border border-gray-300 px-3 py-1.5

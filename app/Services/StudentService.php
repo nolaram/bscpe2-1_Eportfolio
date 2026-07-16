@@ -163,4 +163,13 @@ class StudentService
 
         ];
     }
+
+    public function getStudent(Student $student): Student
+    {
+        return $student->load([
+            'user',
+            'adviser',
+            'dailyAttendances',
+        ]);
+    }
 }

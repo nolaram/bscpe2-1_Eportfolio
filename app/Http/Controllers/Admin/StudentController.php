@@ -78,9 +78,14 @@ class StudentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Student $student)
     {
-        //
+        $student = $this->studentService->getStudent($student);
+
+        return view(
+            'admin.students.show',
+            compact('student')
+        );
     }
 
     /**
