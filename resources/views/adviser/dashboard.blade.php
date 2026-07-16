@@ -1,16 +1,21 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>Admin Dashboard</title>
-</head>
-<body>
+@extends('layouts.adviser-dashboard')
 
-<h1>Adviser Dashboard</h1>
+@section('title', 'Adviser Dashboard')
 
-<form method="POST" action="{{ route('logout') }}">
-    @csrf
-    <button type="submit">Logout</button>
-</form>
+@section('page-title', 'Adviser Dashboard')
 
-</body>
-</html>
+@section('content')
+
+<h2 class="text-2xl font-bold">
+
+    Welcome Adviser!
+
+</h2>
+
+<p class="mt-2 text-gray-500">
+
+    This is your dashboard.
+
+</p>
+
+@endsection

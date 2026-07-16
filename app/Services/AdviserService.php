@@ -6,6 +6,7 @@ use App\Models\Adviser;
 use App\Models\Role;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
+use App\Models\Student;
 
 class AdviserService
 {
@@ -106,5 +107,23 @@ class AdviserService
             $this->userService->deleteUser($user);
 
         });
+    }
+
+    public function getAssignedStudents(
+        Adviser $adviser
+    ): LengthAwarePaginator
+    {
+        return $adviser->students()
+            ->orderBy('last_name')
+            ->paginate(10);
+    }
+
+    public function getStudentAttendances(
+        Student $student
+    ): LengthAwarePaginator
+    {
+        return $student->dailyAttendances()
+            ->latest('attendance_date')
+            ->paginate(10);
     }
 }

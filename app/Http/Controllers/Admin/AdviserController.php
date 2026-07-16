@@ -8,6 +8,8 @@ use App\Services\AdviserService;
 use App\Http\Requests\StoreAdviserRequest;
 use App\Http\Requests\UpdateAdviserRequest;
 use App\Models\Adviser;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Student;
 
 class AdviserController extends Controller
 {   
@@ -98,5 +100,37 @@ class AdviserController extends Controller
         return redirect()
             ->route('admin.advisers.index')
             ->with('success', 'Adviser deleted successfully.');
+    }
+
+    public function assignedStudents()
+    {
+        $adviser = Adviser::where(
+            'user_id',
+            Auth::id()
+        )->firstOrFail();
+
+        $students = $this->adviserService
+            ->getAssignedStudents($adviser);
+
+        return view(
+            'adviser.students.index',
+            compact('students')
+        );
+    }
+
+    public function studentAttendances(
+        Student $student
+    )
+    {
+        $attendances = $this->adviserService
+            ->getStudentAttendances($student);
+
+        return view(
+            'adviser.attendances.index',
+            compact(
+                'student',
+                'attendances'
+            )
+        );
     }
 }

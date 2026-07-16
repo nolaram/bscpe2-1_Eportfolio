@@ -96,6 +96,16 @@ Route::middleware(['auth', 'role:Adviser'])
     ->group(function () {
         Route::get('/dashboard', [AdviserDashboardController::class, 'index'])
             ->name('dashboard');
+
+        Route::get(
+                '/students',
+                [AdviserController::class, 'assignedStudents']
+            )->name('students.index');
+
+        Route::get(
+                '/students/{student}/attendances',
+                [AdviserController::class, 'studentAttendances']
+            )->name('attendances.index');
     });
 
 Route::middleware(['auth', 'role:Student'])
