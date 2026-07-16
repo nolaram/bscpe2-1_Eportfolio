@@ -1,4 +1,10 @@
-<x-app-layout>
+@extends('layouts.dashboard')
+
+@section('title', 'Daily Attendance')
+
+@section('page-title', 'Daily Attendance')
+
+@section('content')
 
     <div class="p-8">
 
@@ -148,7 +154,27 @@
                 </div>
 
 
+                {{-- Lunch Break --}}
+                <div class="mb-8">
 
+                    <label class="inline-flex items-center">
+
+                        <input
+                            type="checkbox"
+                            name="has_lunch_break"
+                            value="1"
+                            class="rounded border-gray-300 text-primary
+                                focus:ring-primary"
+                            {{ old('has_lunch_break') ? 'checked' : '' }}
+                        >
+
+                        <span class="ml-2 text-sm text-gray-700">
+                            Deduct 1 hour lunch break
+                        </span>
+
+                    </label>
+
+                </div>
 
                 {{-- Buttons --}}
                 <div class="flex justify-end gap-3">
@@ -191,4 +217,4 @@
     </div>
 
 
-</x-app-layout>
+@endsection
