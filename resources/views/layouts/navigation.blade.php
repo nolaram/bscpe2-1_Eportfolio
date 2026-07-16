@@ -1,57 +1,75 @@
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-200 shadow-sm">
     <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
-            <div class="flex">
-                <div class="flex items-center">
+    <div class="w-full px-6 lg:px-10">
+        <div class="flex h-20 items-center justify-between">
+            <div class="flex items-center gap-4">
 
-                    <a href="{{ route('dashboard') }}" class="flex items-center">
+                {{-- Department Logo --}}
+                <a href="{{ route('dashboard') }}" class="shrink-0">
 
-                        <div>
+                    <img
+                        src="{{ asset('images/pup_logo.webp') }}"
+                        alt="Computer Engineering Logo"
+                        class="h-12 w-12 rounded-full border border-gray-200 object-cover"
+                    >
 
-                            <h1 class="text-lg font-bold text-gray-900">
-                                PUP OJT E-Portfolio
-                            </h1>
+                </a>
 
-                            <p class="text-xs text-gray-500">
-                                Computer Engineering Portal
-                            </p>
+                <div>
 
-                        </div>
+                    <h1 class="text-xl font-bold tracking-tight text-gray-900">
+                        PUP OJT E-Portfolio
+                    </h1>
 
-                    </a>
+                    <div class="flex items-center gap-2 text-sm text-gray-500">
+
+                        <span>Computer Engineering Department</span>
+
+                        <span class="text-gray-300">•</span>
+
+                        <span>Administrator Portal</span>
+
+                    </div>
 
                 </div>
-            </div>
 
+            </div>
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
-                        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                            <div class="flex items-center gap-2">
+                        <button
+                            class="inline-flex items-center gap-3 rounded-xl border border-gray-200 bg-white px-4 py-2 shadow-sm transition hover:bg-gray-50 hover:shadow-md"
+                        >
 
-                                <div class="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10">
+                            <div class="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10">
 
-                                    <x-heroicon-o-user
-                                        class="h-4 w-4 text-primary"
-                                    />
+                                <x-heroicon-o-user
+                                    class="h-5 w-5 text-primary"
+                                />
 
-                                </div>
+                            </div>
 
-                                <span class="font-medium text-gray-700">
+                            <div class="text-left">
+
+                                <p class="font-semibold text-gray-900">
 
                                     {{ Auth::user()->name }}
 
-                                </span>
+                                </p>
+
+                                <p class="text-xs text-gray-500">
+
+                                    System Administrator
+
+                                </p>
 
                             </div>
 
-                            <div class="ms-1">
-                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                </svg>
-                            </div>
+                            <x-heroicon-o-chevron-down
+                                class="h-4 w-4 text-gray-400"
+                            />
+
                         </button>
                     </x-slot>
 

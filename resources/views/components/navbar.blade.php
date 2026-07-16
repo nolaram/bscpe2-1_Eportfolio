@@ -45,82 +45,27 @@
 
     </div>
 
-    <div class="relative">
+    <div class="flex items-center gap-3">
 
-        <button
-            @click="profileOpen = !profileOpen"
-            class="flex items-center gap-3 rounded-xl border border-gray-200 bg-white px-4 py-2 shadow-sm transition hover:bg-gray-100"
-        >
+        <div class="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10">
 
-            <div
-                class="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-primary/20 to-primary/10"
-            >
+            <x-heroicon-o-user class="h-5 w-5 text-primary"/>
 
-                <x-heroicon-o-user
-                    class="h-5 w-5 text-primary"
-                />
+        </div>
 
-            </div>
+        <div class="text-right">
 
-            <div class="text-left">
+            <p class="font-semibold text-gray-900">
 
-                <p class="font-semibold text-gray-900">
+                {{ Auth::user()->name }}
 
-                    {{ Auth::user()->name }}
+            </p>
 
-                </p>
+            <p class="text-xs text-gray-500">
 
-                <p class="text-xs text-gray-500">
+                {{ Auth::user()->role->name }}
 
-                    @if(Auth::user()->role->name === 'Admin')
-
-                        System Administrator
-
-                    @elseif(Auth::user()->role->name === 'Adviser')
-
-                        Adviser
-
-                    @else
-
-                        Student
-
-                    @endif
-
-                </p>
-
-            </div>
-
-            <x-heroicon-o-chevron-down
-                class="h-4 w-4 text-gray-500"
-            />
-
-        </button>
-
-        <div
-            x-show="profileOpen"
-            @click.outside="profileOpen = false"
-            x-transition
-            class="absolute right-0 mt-2 w-52 rounded-xl border border-gray-200 bg-white shadow-lg"
-            style="display:none;"
-        >
-
-            <form
-                method="POST"
-                action="{{ route('logout') }}"
-            >
-
-                @csrf
-
-                <button
-                    type="submit"
-                    class="block w-full px-4 py-3 text-left text-sm text-red-600 hover:bg-gray-100"
-                >
-
-                    Log Out
-
-                </button>
-
-            </form>
+            </p>
 
         </div>
 

@@ -8,11 +8,13 @@
 
         <div
             x-show="sidebarOpen"
+            x-transition
             class="flex items-center gap-3"
         >
 
             <img
                 src="{{ asset('images/pup_logo.webp') }}"
+                alt="PUP Logo"
                 class="h-12 w-12"
             >
 
@@ -24,7 +26,7 @@
 
                 </h1>
 
-                <p class="text-xs">
+                <p class="text-xs text-white/80">
 
                     Adviser Portal
 
@@ -34,30 +36,74 @@
 
         </div>
 
+        <img
+            x-show="!sidebarOpen"
+            x-transition
+            src="{{ asset('images/pup_logo.webp') }}"
+            alt="PUP Logo"
+            class="h-10 w-10"
+        >
+
     </div>
 
     {{-- Navigation --}}
     <nav class="flex-1 px-3 py-6 space-y-2">
 
+        {{-- Dashboard --}}
         <a
             href="{{ route('adviser.dashboard') }}"
-            class="block rounded-lg px-3 py-3 hover:bg-primary-dark"
+            class="flex items-center gap-3 rounded-xl px-4 py-3 transition-all duration-200
+                {{ request()->routeIs('adviser.dashboard')
+                    ? 'bg-white/20'
+                    : 'hover:bg-white/10' }}"
         >
-            Dashboard
+
+            <x-heroicon-o-home class="h-5 w-5 shrink-0"/>
+
+            <span
+                x-show="sidebarOpen"
+                x-transition
+            >
+                Dashboard
+            </span>
+
         </a>
 
+        {{-- Assigned Students --}}
         <a
             href="{{ route('adviser.students.index') }}"
-            class="block rounded-lg px-3 py-3 hover:bg-primary-dark"
+            class="flex items-center gap-3 rounded-xl px-4 py-3 transition-all duration-200
+                {{ request()->routeIs('adviser.students.*') || request()->routeIs('adviser.attendances.*')
+                    ? 'bg-white/20'
+                    : 'hover:bg-white/10' }}"
         >
-            Assigned Students
+
+            <x-heroicon-o-user-group class="h-5 w-5 shrink-0"/>
+
+            <span
+                x-show="sidebarOpen"
+                x-transition
+            >
+                Assigned Students
+            </span>
+
         </a>
 
+        {{-- Profile --}}
         <a
             href="#"
-            class="block rounded-lg px-3 py-3 hover:bg-primary-dark"
+            class="flex items-center gap-3 rounded-xl px-4 py-3 transition-all duration-200 hover:bg-white/10"
         >
-            Profile
+
+            <x-heroicon-o-user-circle class="h-5 w-5 shrink-0"/>
+
+            <span
+                x-show="sidebarOpen"
+                x-transition
+            >
+                Profile
+            </span>
+
         </a>
 
     </nav>
@@ -73,10 +119,18 @@
             @csrf
 
             <button
-                class="w-full rounded-lg px-3 py-3 hover:bg-primary-dark text-left"
+                type="submit"
+                class="flex w-full items-center gap-3 rounded-xl px-4 py-3 transition-all duration-200 hover:bg-white/10"
             >
 
-                Logout
+                <x-heroicon-o-arrow-left-on-rectangle class="h-5 w-5 shrink-0"/>
+
+                <span
+                    x-show="sidebarOpen"
+                    x-transition
+                >
+                    Logout
+                </span>
 
             </button>
 
