@@ -16,58 +16,66 @@
 </head>
 
 
-<body class="font-sans antialiased bg-gray-100">
+<body class="font-sans antialiased bg-gray-50">
 
 
-<div class="min-h-screen">
+<div class="min-h-screen flex flex-col">
 
 
     {{-- Header --}}
-    <div class="bg-primary text-white py-10 px-6">
+    <header class="bg-primary text-white py-10">
 
-    <div class="text-center">
+        <div class="text-center">
 
-        <img
-            src="{{ asset('images/pup_logo.webp') }}"
-            alt="PUP Logo"
-            class="w-24 h-24 mx-auto mb-4"
-        >
-
-        <h1 class="text-3xl font-bold">
-            OJT E-Portfolio
-        </h1>
-
-        <p class="text-sm text-gray-200 mt-2">
-            OJT Portal
-        </p>
-
-    </div>
-
-</div>
+            <img
+                src="{{ asset('images/pup_logo.webp') }}"
+                alt="PUP Logo"
+                class="w-24 h-24 mx-auto mb-4"
+            >
 
 
+            <h1 class="text-3xl font-bold">
+                OJT E-Portfolio
+            </h1>
 
-    {{-- Login Card --}}
-    <div class="flex justify-center px-6 -mt-8">
+
+            <p class="mt-2 text-gray-200">
+                Student Portal
+            </p>
+
+
+            <p class="mt-4 text-sm text-gray-300">
+                Polytechnic University of the Philippines
+            </p>
+
+        </div>
+
+    </header>
+
+
+
+    {{-- Login Area --}}
+    <main class="flex-1 flex justify-center px-6 -mt-6">
+
 
         <div
-            class="w-full max-w-md bg-white rounded-2xl shadow-xl border border-gray-100 px-8 py-10"
+            class="w-full max-w-md bg-white rounded-xl shadow-lg border border-gray-200 p-8 h-fit"
         >
 
             {{ $slot }}
 
         </div>
 
-    </div>
 
+    </main>
 
 
     {{-- Footer --}}
-    <p class="text-center text-sm text-gray-400 mt-12">
+    <footer class="text-center py-6 text-sm text-gray-400">
 
         © {{ date('Y') }} Polytechnic University of the Philippines
 
-    </p>
+    </footer>
 
 
 </div>
