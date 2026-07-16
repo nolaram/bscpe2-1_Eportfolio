@@ -6,88 +6,174 @@
 
 @section('content')
 
-<h2 class="text-2xl font-bold mb-6">
+<div class="p-8">
 
-Review Attendance
+    {{-- Page Heading --}}
+    <div class="mb-8">
 
-</h2>
+        <h1 class="text-3xl font-bold text-gray-900">
+            Review Attendance
+        </h1>
 
-<table border="1" cellpadding="10">
+        <p class="mt-2 text-sm text-gray-500">
+            Review the attendance details submitted by the student.
+        </p>
 
-<tr>
+    </div>
 
-<th>Student</th>
 
-<td>
+    {{-- Attendance Information Card --}}
+    <div class="rounded-xl border border-gray-200 bg-white p-8 shadow-sm">
 
-{{ $attendance->student->last_name }},
-{{ $attendance->student->first_name }}
 
-</td>
+        <div class="mb-6">
 
-</tr>
+            <h2 class="text-lg font-semibold text-gray-900">
+                Attendance Information
+            </h2>
 
-<tr>
+            <p class="mt-1 text-sm text-gray-500">
+                Attendance record details.
+            </p>
 
-<th>Date</th>
+        </div>
 
-<td>{{ $attendance->attendance_date }}</td>
 
-</tr>
 
-<tr>
+        <div class="overflow-x-auto">
 
-<th>Time In</th>
+            <table class="w-full text-left">
 
-<td>{{ $attendance->time_in }}</td>
 
-</tr>
+                <tbody>
 
-<tr>
 
-<th>Time Out</th>
+                    <tr class="border-b border-gray-100">
 
-<td>{{ $attendance->time_out }}</td>
+                        <th class="w-48 px-4 py-4 text-sm font-medium text-gray-600">
+                            Student
+                        </th>
 
-</tr>
+                        <td class="px-4 py-4 text-gray-900">
 
-<tr>
+                            {{ $attendance->student->last_name }},
+                            {{ $attendance->student->first_name }}
 
-<th>Hours Rendered</th>
+                        </td>
 
-<td>{{ $attendance->hours_rendered }}</td>
+                    </tr>
 
-</tr>
 
-<tr>
 
-<th>Status</th>
+                    <tr class="border-b border-gray-100">
 
-<td>{{ $attendance->status }}</td>
+                        <th class="px-4 py-4 text-sm font-medium text-gray-600">
+                            Date
+                        </th>
 
-</tr>
+                        <td class="px-4 py-4 text-gray-900">
+                            {{ $attendance->attendance_date }}
+                        </td>
 
-</table>
+                    </tr>
 
-<br>
 
-<hr class="my-6">
 
-<div class="rounded-lg bg-green-50 border border-green-200 p-4">
+                    <tr class="border-b border-gray-100">
 
-    <h3 class="font-semibold text-green-700">
+                        <th class="px-4 py-4 text-sm font-medium text-gray-600">
+                            Time In
+                        </th>
 
-        Attendance Record
+                        <td class="px-4 py-4 text-gray-900">
+                            {{ $attendance->time_in }}
+                        </td>
 
-    </h3>
+                    </tr>
 
-    <p class="mt-2 text-sm text-green-600">
 
-        This attendance has been submitted by the student.
-        Advisers may review it at any time.
 
-    </p>
+                    <tr class="border-b border-gray-100">
+
+                        <th class="px-4 py-4 text-sm font-medium text-gray-600">
+                            Time Out
+                        </th>
+
+                        <td class="px-4 py-4 text-gray-900">
+                            {{ $attendance->time_out }}
+                        </td>
+
+                    </tr>
+
+
+
+                    <tr class="border-b border-gray-100">
+
+                        <th class="px-4 py-4 text-sm font-medium text-gray-600">
+                            Hours Rendered
+                        </th>
+
+                        <td class="px-4 py-4 text-gray-900">
+                            {{ $attendance->hours_rendered }} hours
+                        </td>
+
+                    </tr>
+
+
+
+                    <tr>
+
+                        <th class="px-4 py-4 text-sm font-medium text-gray-600">
+                            Status
+                        </th>
+
+                        <td class="px-4 py-4">
+
+                            <span class="rounded-full bg-yellow-100 px-3 py-1 text-sm text-yellow-700">
+
+                                {{ $attendance->status }}
+
+                            </span>
+
+                        </td>
+
+                    </tr>
+
+
+                </tbody>
+
+
+            </table>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    {{-- Notice --}}
+    <div class="mt-6 rounded-lg border border-green-200 bg-green-50 p-4">
+
+
+        <h3 class="font-semibold text-green-700">
+            Attendance Record
+        </h3>
+
+
+        <p class="mt-2 text-sm text-green-600">
+
+            This attendance has been submitted by the student.
+            Advisers may review it at any time.
+
+        </p>
+
+
+    </div>
+
 
 </div>
+
 
 @endsection

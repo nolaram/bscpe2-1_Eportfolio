@@ -75,7 +75,11 @@
 
             {{-- Admin Navigation --}}
 
-            <p class="px-3 mb-3 text-xs font-semibold uppercase tracking-wider text-gray-200">
+            <p
+                x-show="sidebarOpen"
+                x-transition
+                class="px-3 mb-3 text-xs font-semibold uppercase tracking-wider text-gray-200"
+            >
                 Main
             </p>
 
@@ -97,7 +101,11 @@
             </a>
 
 
-            <p class="px-3 mt-6 mb-3 text-xs font-semibold uppercase tracking-wider text-gray-200">
+            <p
+                x-show="sidebarOpen"
+                x-transition
+                class="px-3 mt-6 mb-3 text-xs font-semibold uppercase tracking-wider text-gray-200"
+            >
                 Management
             </p>
 
@@ -143,7 +151,11 @@
 
             {{-- Adviser Navigation --}}
 
-            <p class="px-3 mb-3 text-xs font-semibold uppercase tracking-wider text-gray-200">
+            <p
+                x-show="sidebarOpen"
+                x-transition
+                class="px-3 mb-3 text-xs font-semibold uppercase tracking-wider text-gray-200"
+            >
                 Main
             </p>
 
@@ -166,7 +178,11 @@
             </a>
 
 
-            <p class="px-3 mt-6 mb-3 text-xs font-semibold uppercase tracking-wider text-gray-200">
+            <p
+                x-show="sidebarOpen"
+                x-transition
+                class="px-3 mt-6 mb-3 text-xs font-semibold uppercase tracking-wider text-gray-200"
+            >
                 Management
             </p>
 
@@ -192,10 +208,12 @@
         @elseif(Auth::user()->role->name === 'Student')
 
             {{-- Student Navigation --}}
-            {{-- KEEPING ALL ORIGINAL FEATURES --}}
 
-
-            <p class="px-3 mb-3 text-xs font-semibold uppercase tracking-wider text-gray-200">
+            <p
+                x-show="sidebarOpen"
+                x-transition
+                class="px-3 mb-3 text-xs font-semibold uppercase tracking-wider text-gray-200"
+            >
                 Main
             </p>
 
@@ -218,7 +236,11 @@
             </a>
 
 
-            <p class="px-3 mt-6 mb-3 text-xs font-semibold uppercase tracking-wider text-gray-200">
+            <p
+                x-show="sidebarOpen"
+                x-transition
+                class="px-3 mt-6 mb-3 text-xs font-semibold uppercase tracking-wider text-gray-200"
+            >
                 OJT Management
             </p>
 

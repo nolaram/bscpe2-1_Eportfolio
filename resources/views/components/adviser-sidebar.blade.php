@@ -57,13 +57,6 @@
             href="#"
             class="block rounded-lg px-3 py-3 hover:bg-primary-dark"
         >
-            Attendance Approval
-        </a>
-
-        <a
-            href="#"
-            class="block rounded-lg px-3 py-3 hover:bg-primary-dark"
-        >
             Profile
         </a>
 

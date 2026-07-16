@@ -1,4 +1,10 @@
-<x-app-layout>
+@extends('layouts.dashboard')
+
+@section('title', 'Daily Attendance')
+
+@section('page-title', 'Daily Attendance')
+
+@section('content')
 
     <div class="p-8">
 
@@ -66,6 +72,10 @@
                             </th>
 
                             <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">
+                                Lunch Break
+                            </th>
+
+                            <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">
                                 Status
                             </th>
 
@@ -91,6 +101,11 @@
                                 {{ $attendance->attendance_date }}
                             </td>
 
+                            <td class="px-6 py-4 text-sm text-gray-700">
+
+                                {{ $attendance->has_lunch_break ? 'Yes' : 'No' }}
+
+                            </td>
 
                             <td class="px-6 py-4 text-sm text-gray-700">
                                 {{ $attendance->time_in }}
@@ -122,7 +137,7 @@
                             <td class="px-6 py-4">
 
 
-                                @if($attendance->status === 'Pending')
+                                @if($attendance->status === 'Submitted')
 
 
                                     <div class="flex justify-center gap-2">
@@ -202,7 +217,7 @@
                         <tr>
 
                             <td
-                                colspan="6"
+                                colspan="7"
                                 class="px-6 py-12 text-center text-gray-500"
                             >
 
@@ -236,4 +251,4 @@
     </div>
 
 
-</x-app-layout>
+@endsection
