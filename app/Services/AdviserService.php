@@ -134,4 +134,88 @@ class AdviserService
     {
         return $attendance->load('student');
     }
+
+    public function approveAttendance(
+        DailyAttendance $attendance
+    ): DailyAttendance
+    {
+        if ($attendance->status !== 'Pending') {
+
+            throw new \Exception(
+                'Only pending attendance can be approved.'
+            );
+
+        }
+
+        $attendance->update([
+
+            'status' => 'Approved',
+
+        ]);
+
+        return $attendance->fresh();
+    }
+
+    public function rejectAttendance(
+        DailyAttendance $attendance
+    ): DailyAttendance
+    {
+        if ($attendance->status !== 'Pending') {
+
+            throw new \Exception(
+                'Only pending attendance can be rejected.'
+            );
+
+
+        }
+
+        $attendance->update([
+
+            'status' => 'Rejected',
+
+        ]);
+
+        return $attendance->fresh();
+    }
+
+    public function getDashboardStatistics(
+        Adviser $adviser
+    ): array
+    {
+        $studentIds = $adviser->students()
+            ->pluck('id');
+
+        return [
+
+            'assigned_students' => $studentIds->count(),
+
+            'pending_attendance' => \App\Models\DailyAttendance::whereIn(
+                'student_id',
+                $studentIds
+            )->where(
+                'status',
+                'Pending'
+            )->count(),
+
+            'approved_today' => \App\Models\DailyAttendance::whereIn(
+                'student_id',
+                $studentIds
+            )->where(
+                'status',
+                'Approved'
+            )->whereDate(
+                'updated_at',
+                today()
+            )->count(),
+
+            'rejected' => \App\Models\DailyAttendance::whereIn(
+                'student_id',
+                $studentIds
+            )->where(
+                'status',
+                'Rejected'
+            )->count(),
+
+        ];
+    }
 }

@@ -111,6 +111,16 @@ Route::middleware(['auth', 'role:Adviser'])
                 '/attendances/{attendance}',
                 [AdviserController::class, 'showAttendance']
             )->name('attendances.show');
+
+        Route::patch(
+                '/attendances/{attendance}/approve',
+                [AdviserController::class, 'approve']
+            )->name('attendances.approve');
+
+        Route::patch(
+                '/attendances/{attendance}/reject',
+                [AdviserController::class, 'reject']
+            )->name('attendances.reject');
     });
 
 Route::middleware(['auth', 'role:Student'])

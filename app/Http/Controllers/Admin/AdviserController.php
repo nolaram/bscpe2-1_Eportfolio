@@ -147,4 +147,40 @@ class AdviserController extends Controller
             compact('attendance')
         );
     }
+
+    public function approve(
+        DailyAttendance $attendance
+    )
+    {
+        $this->adviserService
+            ->approveAttendance($attendance);
+
+        return redirect()
+            ->route(
+                'adviser.attendances.show',
+                $attendance
+            )
+            ->with(
+                'success',
+                'Attendance approved successfully.'
+            );
+    }
+
+    public function reject(
+        DailyAttendance $attendance
+    )
+    {
+        $this->adviserService
+            ->rejectAttendance($attendance);
+
+        return redirect()
+            ->route(
+                'adviser.attendances.show',
+                $attendance
+            )
+            ->with(
+                'success',
+                'Attendance rejected successfully.'
+            );
+    }
 }

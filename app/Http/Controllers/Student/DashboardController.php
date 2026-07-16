@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Services\StudentService;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Student;
 
 class DashboardController extends Controller
 {
@@ -17,12 +18,20 @@ class DashboardController extends Controller
 
     public function index()
     {
-        $student = $this->studentService
-            ->getStudentByUserId(Auth::id());
+        $student = Student::where(
+            'user_id',
+            Auth::id()
+        )->firstOrFail();
+
+        $statistics = $this->studentService
+            ->getDashboardStatistics($student);
 
         return view(
             'student.dashboard',
-            compact('student')
+            compact(
+                'student',
+                'statistics'
+            )
         );
     }
 }

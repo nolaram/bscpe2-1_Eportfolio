@@ -109,4 +109,32 @@ class StudentService
         ->where('user_id', $userId)
         ->firstOrFail();
     }
+
+    public function getDashboardStatistics(
+        Student $student
+    ): array
+    {
+        $attendances = $student->dailyAttendances();
+
+        return [
+
+            'total_attendance' => $attendances->count(),
+
+            'pending_attendance' => $student
+                ->dailyAttendances()
+                ->where('status', 'Pending')
+                ->count(),
+
+            'approved_attendance' => $student
+                ->dailyAttendances()
+                ->where('status', 'Approved')
+                ->count(),
+
+            'approved_hours' => $student
+                ->dailyAttendances()
+                ->where('status', 'Approved')
+                ->sum('hours_rendered'),
+
+        ];
+    }
 }
