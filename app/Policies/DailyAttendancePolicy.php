@@ -41,9 +41,7 @@ class DailyAttendancePolicy
     ): bool
     {
         return
-            $dailyAttendance->student->user_id === $user->id
-            &&
-            $dailyAttendance->status === 'Pending';
+            $dailyAttendance->student->user_id === $user->id;
     }
 
     /**
@@ -55,9 +53,7 @@ class DailyAttendancePolicy
     ): bool
     {
         return
-            $dailyAttendance->student->user_id === $user->id
-            &&
-            $dailyAttendance->status === 'Pending';
+            $dailyAttendance->student->user_id === $user->id;
     }
 
     /**

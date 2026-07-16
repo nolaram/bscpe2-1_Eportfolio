@@ -2,119 +2,123 @@
 
 <div class="p-6">
 
-<h1>Daily Attendance</h1>
+    <h1>Daily Attendance</h1>
 
-<br>
+    <br>
 
-<a href="{{ route('student.student.daily-attendances.create') }}">
+    <a href="{{ route('student.student.daily-attendances.create') }}">
 
-Add Attendance
+        Add Attendance
 
-</a>
+    </a>
 
-<br><br>
+    <br><br>
 
-<table border="1" cellpadding="10">
+    <table border="1" cellpadding="10">
 
-<thead>
+        <thead>
 
-<tr>
+            <tr>
 
-    <th>Date</th>
+                <th>Date</th>
 
-    <th>Time In</th>
+                <th>Time In</th>
 
-    <th>Time Out</th>
+                <th>Time Out</th>
 
-    <th>Hours</th>
+                <th>Lunch Break</th>
 
-    <th>Status</th>
+                <th>Hours</th>
 
-    <th>Actions</th>
+                <th>Status</th>
 
-</tr>
+                <th>Actions</th>
 
-</thead>
+            </tr>
 
-<tbody>
+        </thead>
 
-@forelse($attendances as $attendance)
+        <tbody>
 
-<tr>
+        @forelse($attendances as $attendance)
 
-    <td>{{ $attendance->attendance_date }}</td>
+            <tr>
 
-    <td>{{ $attendance->time_in }}</td>
+                <td>{{ $attendance->attendance_date }}</td>
 
-    <td>{{ $attendance->time_out }}</td>
+                <td>{{ $attendance->time_in }}</td>
 
-    <td>{{ $attendance->hours_rendered }}</td>
+                <td>{{ $attendance->time_out }}</td>
 
-    <td>{{ $attendance->status }}</td>
+                <td>
 
-    <td>
+                    {{ $attendance->has_lunch_break ? 'Yes' : 'No' }}
 
-    @if($attendance->status === 'Pending')
+                </td>
 
-        <a
-            href="{{ route(
-                'student.student.daily-attendances.edit',
-                $attendance
-            ) }}"
-        >
-            Edit
-        </a>
+                <td>{{ $attendance->hours_rendered }}</td>
 
-        |
+                <td>{{ $attendance->status }}</td>
 
-        <form
-            action="{{ route(
-                'student.student.daily-attendances.destroy',
-                $attendance
-            ) }}"
-            method="POST"
-            style="display:inline;"
-        >
+                <td>
 
-            @csrf
-            @method('DELETE')
+                    <a
+                        href="{{ route(
+                            'student.student.daily-attendances.edit',
+                            $attendance
+                        ) }}"
+                    >
+                        Edit
+                    </a>
 
-            <button
-                type="submit"
-                onclick="return confirm('Delete this attendance?')"
-            >
-                Delete
-            </button>
+                    |
 
-        </form>
+                    <form
+                        action="{{ route(
+                            'student.student.daily-attendances.destroy',
+                            $attendance
+                        ) }}"
+                        method="POST"
+                        style="display:inline;"
+                    >
 
-    @endif
+                        @csrf
+                        @method('DELETE')
 
-    </td>
+                        <button
+                            type="submit"
+                            onclick="return confirm('Delete this attendance?')"
+                        >
+                            Delete
+                        </button>
 
-</tr>
+                    </form>
 
-@empty
+                </td>
 
-<tr>
+            </tr>
 
-<td colspan="6">
+        @empty
 
-No attendance records.
+            <tr>
 
-</td>
+                <td colspan="7">
 
-</tr>
+                    No attendance records.
 
-@endforelse
+                </td>
 
-</tbody>
+            </tr>
 
-</table>
+        @endforelse
 
-<br>
+        </tbody>
 
-{{ $attendances->links() }}
+    </table>
+
+    <br>
+
+    {{ $attendances->links() }}
 
 </div>
 

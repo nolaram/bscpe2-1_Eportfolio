@@ -4,9 +4,20 @@
 
         <div class="flex justify-between text-sm text-gray-600">
 
-            <span>180 / 300 Hours Completed</span>
+            <span>
 
-            <span>66.7%</span>
+                {{ $statistics['total_hours'] }}
+                /
+                {{ $statistics['required_hours'] }}
+                Hours Completed
+
+            </span> 
+
+            <span>
+
+                {{ $statistics['progress_percentage'] }}%
+
+            </span>
 
         </div>
 
@@ -14,14 +25,15 @@
 
             <div
                 class="h-3 rounded-full bg-primary"
-                style="width:66.7%;"
-            ></div>
+                style="width: {{ $statistics['progress_percentage'] . '%' }};"
+            ></div> 
 
         </div>
 
         <p class="text-sm text-gray-500">
 
-            120 hours remaining
+            {{ $statistics['remaining_hours'] }}
+            hours remaining
 
         </p>
 

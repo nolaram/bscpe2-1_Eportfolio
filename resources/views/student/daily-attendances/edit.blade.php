@@ -45,7 +45,7 @@
     name="time_in"
     value="{{ old(
         'time_in',
-        $dailyAttendance->time_in
+        \Carbon\Carbon::parse($dailyAttendance->time_in)->format('H:i')
     ) }}"
 >
 
@@ -58,9 +58,26 @@
     name="time_out"
     value="{{ old(
         'time_out',
-        $dailyAttendance->time_out
+        \Carbon\Carbon::parse($dailyAttendance->time_out)->format('H:i')
     ) }}"
 >
+
+<div class="mt-4">
+
+    <label>
+
+        <input
+            type="checkbox"
+            name="has_lunch_break"
+            value="1"
+            @checked($dailyAttendance->has_lunch_break)
+        >
+
+        Deduct 1-hour lunch break
+
+    </label>
+
+</div>
 
 <br><br>
 

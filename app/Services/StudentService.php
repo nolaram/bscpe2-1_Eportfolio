@@ -16,11 +16,35 @@ class StudentService
     ) {
     }
    
-    public function getAllStudents(): LengthAwarePaginator
+    public function getAllStudents(
+        ?string $search = null,
+        ?int $adviserId = null
+    ): LengthAwarePaginator
     {
-        return Student::with('user')
+        return Student::with([
+                'user',
+                'adviser',
+                'dailyAttendances',
+            ])
+            ->when($search, function ($query) use ($search) {
+
+                $query->where(function ($q) use ($search) {
+
+                    $q->where('student_number', 'like', "%{$search}%")
+                    ->orWhere('first_name', 'like', "%{$search}%")
+                    ->orWhere('last_name', 'like', "%{$search}%");
+
+                });
+
+            })
+            ->when($adviserId, function ($query) use ($adviserId) {
+
+                $query->where('adviser_id', $adviserId);
+
+            })
             ->orderBy('student_number')
-            ->paginate(10);
+            ->paginate(10)
+            ->withQueryString();
     }
 
     /**
@@ -110,30 +134,32 @@ class StudentService
         ->firstOrFail();
     }
 
-    public function getDashboardStatistics(
-        Student $student
-    ): array
+    public function getDashboardStatistics(Student $student): array
     {
         $attendances = $student->dailyAttendances();
 
+        $totalHours = (clone $attendances)
+            ->sum('hours_rendered');
+
+        $requiredHours = 300;
+
         return [
 
-            'total_attendance' => $attendances->count(),
+            'total_attendance' => (clone $attendances)->count(),
 
-            'pending_attendance' => $student
-                ->dailyAttendances()
-                ->where('status', 'Pending')
-                ->count(),
+            'total_hours' => $totalHours,
 
-            'approved_attendance' => $student
-                ->dailyAttendances()
-                ->where('status', 'Approved')
-                ->count(),
+            'required_hours' => $requiredHours,
 
-            'approved_hours' => $student
-                ->dailyAttendances()
-                ->where('status', 'Approved')
-                ->sum('hours_rendered'),
+            'remaining_hours' => max(
+                0,
+                $requiredHours - $totalHours
+            ),
+
+            'progress_percentage' => min(
+                100,
+                round(($totalHours / $requiredHours) * 100, 1)
+            ),
 
         ];
     }

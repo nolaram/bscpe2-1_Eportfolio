@@ -9,6 +9,80 @@
                 Admin Dashboard
             </h1>
 
+            <div class="mt-10">
+
+                <h2 class="mb-5 text-xl font-semibold text-gray-800">
+
+                    System Overview
+
+                </h2>
+
+                <div class="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4">
+
+                    <x-dashboard-stat-card
+                        title="Students"
+                        :value="$statistics['students']"
+                    >
+
+                        <x-slot:icon>
+
+                            <x-heroicon-o-user-group
+                                class="h-7 w-7"
+                            />
+
+                        </x-slot:icon>
+
+                    </x-dashboard-stat-card>
+
+                    <x-dashboard-stat-card
+                        title="Advisers"
+                        :value="$statistics['advisers']"
+                    >
+
+                        <x-slot:icon>
+
+                            <x-heroicon-o-academic-cap
+                                class="h-7 w-7"
+                            />
+
+                        </x-slot:icon>
+
+                    </x-dashboard-stat-card>
+
+                    <x-dashboard-stat-card
+                        title="Attendance Logs"
+                        :value="$statistics['attendance_logs']"
+                    >
+
+                        <x-slot:icon>
+
+                            <x-heroicon-o-clipboard-document-list
+                                class="h-7 w-7"
+                            />
+
+                        </x-slot:icon>
+
+                    </x-dashboard-stat-card>
+
+                    <x-dashboard-stat-card
+                        title="Hours Rendered"
+                        :value="$statistics['hours_rendered']"
+                    >
+
+                        <x-slot:icon>
+
+                            <x-heroicon-o-clock
+                                class="h-7 w-7"
+                            />
+
+                        </x-slot:icon>
+
+                    </x-dashboard-stat-card>
+
+                </div>
+
+            </div>
+
             <p class="mt-2 text-gray-500">
                 Welcome back. Manage the OJT E-Portfolio system from one place.
             </p>

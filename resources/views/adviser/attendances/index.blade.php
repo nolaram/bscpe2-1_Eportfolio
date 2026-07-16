@@ -68,6 +68,18 @@
 
 </tr>
 
+<tr>
+
+    <th>Lunch Break</th>
+
+    <td>
+
+        {{ $attendance->has_lunch_break ? 'Yes' : 'No' }}
+
+    </td>
+
+</tr>
+
 @empty
 
 <tr>

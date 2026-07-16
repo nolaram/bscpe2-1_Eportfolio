@@ -69,6 +69,14 @@ class StoreDailyAttendanceRequest extends FormRequest
 
             ],
 
+            'has_lunch_break' => [
+
+                'nullable',
+
+                'boolean',
+
+            ],
+
         ];
     }
 
@@ -80,5 +88,12 @@ class StoreDailyAttendanceRequest extends FormRequest
                 'You have already submitted attendance for this date.',
 
         ];
+    }
+
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+            'has_lunch_break' => $this->boolean('has_lunch_break'),
+        ]);
     }
 }

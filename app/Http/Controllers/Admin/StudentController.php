@@ -19,11 +19,22 @@ class StudentController extends Controller
         protected StudentService $studentService
     ) {}
 
-    public function index()
+    public function index(Request $request)
     {
-        $students = $this->studentService->getAllStudents();
+        $students = $this->studentService->getAllStudents(
+            $request->search,
+            $request->adviser
+        );
 
-        return view('admin.students.index', compact('students'));
+        $advisers = Adviser::orderBy('last_name')->get();
+
+        return view(
+            'admin.students.index',
+            compact(
+                'students',
+                'advisers'
+            )
+        );
     }
 
     /**

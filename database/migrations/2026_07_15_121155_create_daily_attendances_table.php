@@ -16,6 +16,13 @@ return new class extends Migration
                 ->constrained()
                 ->cascadeOnDelete();
 
+            $table->unique([
+                'student_id',
+                'attendance_date',
+            ]);
+
+            $table->boolean('has_lunch_break')->default(true);
+
             $table->date('attendance_date');
 
             $table->time('time_in');
@@ -28,6 +35,7 @@ return new class extends Migration
                 'Pending',
                 'Approved',
                 'Rejected',
+                'Submitted'
             ])->default('Pending');
 
             $table->timestamps();

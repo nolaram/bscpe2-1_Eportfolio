@@ -17,6 +17,8 @@ class DailyAttendance extends Model
 
         'time_out',
 
+        'has_lunch_break',
+
         'hours_rendered',
 
         'status',
@@ -26,5 +28,24 @@ class DailyAttendance extends Model
     public function student(): BelongsTo
     {
         return $this->belongsTo(Student::class);
+    }
+
+    protected function casts(): array
+    {
+        return [
+            'attendance_date' => 'date',
+            'time_in' => 'datetime:H:i',
+            'time_out' => 'datetime:H:i',
+        ];
+    }
+
+    public function getTimeInAttribute($value)
+    {
+        return substr($value, 0, 5);
+    }
+
+    public function getTimeOutAttribute($value)
+    {
+        return substr($value, 0, 5);
     }
 }

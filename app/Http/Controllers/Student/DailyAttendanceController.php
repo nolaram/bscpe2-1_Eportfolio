@@ -94,7 +94,7 @@ class DailyAttendanceController extends Controller
         DailyAttendance $dailyAttendance
     )
     {
-        // dd($dailyAttendance);
+        // dd($dailyAttendance
 
         $this->authorize('update', $dailyAttendance);
 

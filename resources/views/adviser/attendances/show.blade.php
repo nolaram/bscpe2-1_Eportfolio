@@ -71,48 +71,23 @@ Review Attendance
 
 <br>
 
-@if($attendance->status === 'Pending')
+<hr class="my-6">
 
-<form
-    action="{{ route(
-        'adviser.attendances.approve',
-        $attendance
-    ) }}"
-    method="POST"
-    style="display:inline;"
->
+<div class="rounded-lg bg-green-50 border border-green-200 p-4">
 
-    @csrf
-    @method('PATCH')
+    <h3 class="font-semibold text-green-700">
 
-    <button type="submit">
+        Attendance Record
 
-        Approve
+    </h3>
 
-    </button>
+    <p class="mt-2 text-sm text-green-600">
 
-</form>
+        This attendance has been submitted by the student.
+        Advisers may review it at any time.
 
-<form
-    action="{{ route(
-        'adviser.attendances.reject',
-        $attendance
-    ) }}"
-    method="POST"
-    style="display:inline;"
->
+    </p>
 
-    @csrf
-    @method('PATCH')
-
-    <button type="submit">
-
-        Reject
-
-    </button>
-
-</form>
-
-@endif
+</div>
 
 @endsection

@@ -3,12 +3,24 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Services\AdminService;
 
 class DashboardController extends Controller
 {
+    public function __construct(
+        protected AdminService $adminService
+    ) {
+    }
+
     public function index()
     {
-        return view('admin.dashboard');
+        $statistics =
+            $this->adminService
+                ->getDashboardStatistics();
+
+        return view(
+            'admin.dashboard',
+            compact('statistics')
+        );
     }
 }

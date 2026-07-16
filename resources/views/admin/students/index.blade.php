@@ -19,15 +19,60 @@
     <div class="p-6">
 
         {{-- Toolbar --}}
-        <div class="mb-6 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+        <div class="mb-6 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
 
-            <input
-                type="text"
-                placeholder="Search students..."
-                class="w-full rounded-lg border border-gray-300 px-4 py-2.5 text-sm
-                       focus:border-primary focus:ring-2 focus:ring-primary/20
-                       outline-none transition md:max-w-sm"
+            <form
+                method="GET"
+                action="{{ route('admin.students.index') }}"
+                class="flex flex-col gap-3 md:flex-row"
             >
+
+                <input
+                    type="text"
+                    name="search"
+                    value="{{ request('search') }}"
+                    placeholder="Search student..."
+                    class="rounded-lg border border-gray-300 px-4 py-2.5
+                           focus:border-primary focus:ring-2
+                           focus:ring-primary/20 outline-none"
+                >
+
+                <select
+                    name="adviser"
+                    class="rounded-lg border border-gray-300 px-4 py-2.5
+                           focus:border-primary focus:ring-2
+                           focus:ring-primary/20 outline-none"
+                >
+
+                    <option value="">
+                        All Advisers
+                    </option>
+
+                    @foreach($advisers as $adviser)
+
+                        <option
+                            value="{{ $adviser->id }}"
+                            @selected(request('adviser') == $adviser->id)
+                        >
+
+                            {{ $adviser->last_name }},
+                            {{ $adviser->first_name }}
+
+                        </option>
+
+                    @endforeach
+
+                </select>
+
+                <button
+                    class="rounded-lg bg-primary px-5 py-2.5 text-white hover:opacity-90"
+                >
+
+                    Search
+
+                </button>
+
+            </form>
 
             <a
                 href="{{ route('admin.students.create') }}"
@@ -65,6 +110,18 @@
                             Email
                         </th>
 
+                        <th class="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">
+                            Adviser
+                        </th>
+
+                        <th class="px-6 py-3 text-center text-xs font-semibold uppercase tracking-wider text-gray-500">
+                            Hours
+                        </th>
+
+                        <th class="px-6 py-3 text-center text-xs font-semibold uppercase tracking-wider text-gray-500">
+                            Progress
+                        </th>
+
                         <th class="px-6 py-3 text-center text-xs font-semibold uppercase tracking-wider text-gray-500">
                             Actions
                         </th>
@@ -76,6 +133,19 @@
                 <tbody class="divide-y divide-gray-100">
 
                     @forelse($students as $student)
+
+                        @php
+
+                            $hours = $student->dailyAttendances
+                                ->where('status', 'Submitted')
+                                ->sum('hours_rendered');
+
+                            $progress = min(
+                                100,
+                                ($hours / 300) * 100
+                            );
+
+                        @endphp
 
                         <tr class="transition hover:bg-gray-50">
 
@@ -90,6 +160,37 @@
 
                             <td class="px-6 py-4 text-sm text-gray-600">
                                 {{ $student->user->email }}
+                            </td>
+
+                            <td class="px-6 py-4 text-sm text-gray-600">
+                                {{ $student->adviser?->last_name ?? 'Not Assigned' }}
+                            </td>
+
+                            <td class="px-6 py-4 text-center text-sm font-medium">
+                                {{ number_format($hours, 1) }}
+                            </td>
+
+                            <td class="px-6 py-4">
+
+                                <div class="mx-auto w-32">
+
+                                    <div class="h-2 rounded-full bg-gray-200">
+
+                                        <div
+                                            class="h-2 rounded-full bg-primary"
+                                            style="width: {{ $progress }}%;"
+                                        ></div>
+
+                                    </div>
+
+                                    <p class="mt-1 text-center text-xs text-gray-500">
+
+                                        {{ round($progress) }}%
+
+                                    </p>
+
+                                </div>
+
                             </td>
 
                             <td class="px-6 py-4">
@@ -119,6 +220,7 @@
                                         @method('DELETE')
 
                                         <button
+                                            type="submit"
                                             onclick="return confirm('Delete this student?')"
                                             class="inline-flex items-center gap-1 rounded-md
                                                    border border-red-200 px-3 py-1.5
@@ -159,7 +261,7 @@
                         <tr>
 
                             <td
-                                colspan="4"
+                                colspan="7"
                                 class="px-6 py-12 text-center text-gray-500"
                             >
 
@@ -174,6 +276,12 @@
                 </tbody>
 
             </table>
+
+        </div>
+
+        <div class="mt-6">
+
+            {{ $students->links() }}
 
         </div>
 

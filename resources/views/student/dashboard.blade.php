@@ -10,7 +10,7 @@
 
     @include('student.partials.welcome', ['student' => $student])
     @include('student.partials.stats', ['student' => $student])
-    @include('student.partials.progress', ['student' => $student])
+    @include('student.partials.progress', ['statistics' => $statistics])
 
 </div>
 

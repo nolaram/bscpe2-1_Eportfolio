@@ -64,6 +64,21 @@ class UpdateDailyAttendanceRequest extends FormRequest
                 'after:time_in',
             ],
 
+            'has_lunch_break' => [
+
+                'nullable',
+
+                'boolean',
+
+            ],
+
         ];
+    }
+
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+            'has_lunch_break' => $this->boolean('has_lunch_break'),
+        ]);
     }
 }

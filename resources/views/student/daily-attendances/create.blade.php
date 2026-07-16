@@ -36,7 +36,9 @@
 <input
     type="time"
     name="time_in"
-    value="{{ old('time_in') }}"
+    value="{{ old('time_in', $dailyAttendance->time_in ?? '') }}"
+    step="60"
+    required
 >
 
 <br><br>
@@ -46,8 +48,27 @@
 <input
     type="time"
     name="time_out"
-    value="{{ old('time_out') }}"
+    value="{{ old('time_out', $dailyAttendance->time_out ?? '') }}"
+    step="60"
+    required
 >
+
+<div class="mt-4">
+
+    <label>
+
+        <input
+            type="checkbox"
+            name="has_lunch_break"
+            value="1"
+            checked
+        >
+
+        Deduct 1-hour lunch break
+
+    </label>
+
+</div>
 
 <br><br>
 
