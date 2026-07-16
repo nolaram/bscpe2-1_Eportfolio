@@ -11,72 +11,45 @@
     <meta name="csrf-token"
           content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name') }}</title>
+    <title>
+        @yield('title') - OJT E-Portfolio
+    </title>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
 </head>
 
+
 <body class="bg-gray-100 font-sans antialiased">
 
-<div class="flex min-h-screen">
 
-    {{-- Sidebar --}}
-    <aside
-        class="w-64 bg-white border-r border-gray-200">
+<header class="bg-white border-b border-gray-200">
 
-        <div class="h-16 flex items-center px-6 border-b">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
 
-            <h1 class="text-xl font-bold text-primary">
+        <h1 class="text-xl font-bold text-primary">
+            OJT E-Portfolio
+        </h1>
 
-                OJT E-Portfolio
 
-            </h1>
+        <div class="text-sm text-gray-600">
+
+            {{ Auth::user()->first_name ?? Auth::user()->name }}
 
         </div>
 
-        <nav class="p-4 space-y-2">
-
-            {{ $sidebar }}
-
-        </nav>
-
-    </aside>
-
-    {{-- Main --}}
-    <div class="flex-1 flex flex-col">
-
-        {{-- Topbar --}}
-        <header
-            class="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-8">
-
-            <h2
-                class="text-lg font-semibold text-gray-800">
-
-                {{ $title }}
-
-            </h2>
-
-            <div
-                class="text-sm text-gray-500">
-
-                {{ Auth::user()->first_name ?? Auth::user()->name }}
-
-            </div>
-
-        </header>
-
-        {{-- Content --}}
-        <main
-            class="flex-1 p-8">
-
-            {{ $slot }}
-
-        </main>
-
     </div>
 
-</div>
+</header>
+
+
+
+<main class="max-w-7xl mx-auto p-8">
+
+    @yield('content')
+
+</main>
+
 
 </body>
 

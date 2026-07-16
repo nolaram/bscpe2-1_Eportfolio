@@ -1,22 +1,10 @@
-<x-app-layout>
+@extends('layouts.admin')
 
-    <x-slot name="header">
+@section('title', 'Student Management')
 
-        <div>
+@section('content')
 
-            <h2 class="text-2xl font-bold text-gray-900">
-                Student Management
-            </h2>
-
-            <p class="mt-1 text-sm text-gray-500">
-                View, organize, and manage registered students.
-            </p>
-
-        </div>
-
-    </x-slot>
-
-    <div class="p-6">
+<div class="p-6">
 
         {{-- Toolbar --}}
         <div class="mb-6 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
@@ -45,7 +33,7 @@
         </div>
 
         {{-- Student Table --}}
-        <div class="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
+        <div class="overflow-x-auto rounded-xl border border-gray-200 bg-white shadow-sm">
 
             <table class="w-full">
 
@@ -179,4 +167,4 @@
 
     </div>
 
-</x-app-layout>
+@endsection
