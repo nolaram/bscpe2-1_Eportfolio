@@ -7,6 +7,7 @@ use App\Http\Controllers\Student\DashboardController as StudentDashboardControll
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\AdviserController;
+use App\Http\Controllers\Student\ProfileController;
 
 // Route::get('/', function () {
 //     return redirect()->route('login');
@@ -124,6 +125,17 @@ Route::middleware(['auth', 'role:Student'])
                 'daily-attendances',
                 \App\Http\Controllers\Student\DailyAttendanceController::class
             )->names('student.daily-attendances');
+
+        Route::get(
+            'profile',
+            [ProfileController::class, 'edit']
+        )->name('profile.edit');
+
+        Route::put(
+            'profile',
+            [ProfileController::class, 'update']
+        )->name('profile.update');
+            
     });
 
 // Load Breeze authentication routes

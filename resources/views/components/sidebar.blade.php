@@ -235,7 +235,6 @@
 
             </a>
 
-
             <p
                 x-show="sidebarOpen"
                 x-transition
@@ -247,7 +246,7 @@
 
             {{-- Profile --}}
             <a 
-                href=""
+                href="{{ route('student.profile.edit') }}"
                 class="
                     flex items-center gap-3 rounded-lg px-3 py-3
                     transition hover:translate-x-1 hover:bg-primary-dark

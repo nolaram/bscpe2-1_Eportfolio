@@ -172,4 +172,39 @@ class StudentService
             'dailyAttendances',
         ]);
     }
+
+    public function getStudentProfileStatistics(
+        Student $student
+    ): array
+    {
+        $approvedHours = $student
+            ->dailyAttendances
+            ->where('status', 'Submitted')
+            ->sum('hours_rendered');
+
+        $requiredHours = 300;
+
+        return [
+
+            'attendance_logs' => $student
+                ->dailyAttendances
+                ->count(),
+
+            'hours_rendered' => $approvedHours,
+
+            'remaining_hours' => max(
+                0,
+                $requiredHours - $approvedHours
+            ),
+
+            'progress' => min(
+                100,
+                round(
+                    ($approvedHours / $requiredHours) * 100,
+                    1
+                )
+            ),
+
+        ];
+    }
 }

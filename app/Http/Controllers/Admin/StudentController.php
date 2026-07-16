@@ -80,11 +80,42 @@ class StudentController extends Controller
      */
     public function show(Student $student)
     {
-        $student = $this->studentService->getStudent($student);
+        $student->load([
+            'user',
+            'adviser',
+            'dailyAttendances',
+        ]);
+
+        $hoursRendered = $student->dailyAttendances
+            ->where('status', 'Submitted')
+            ->sum('hours_rendered');
+
+        $requiredHours = 300;
+
+        $statistics = [
+
+            'attendance_logs' => $student->dailyAttendances->count(),
+
+            'hours_rendered' => $hoursRendered,
+
+            'remaining_hours' => max(
+                0,
+                $requiredHours - $hoursRendered
+            ),
+
+            'progress' => min(
+                100,
+                round(($hoursRendered / $requiredHours) * 100)
+            ),
+
+        ];
 
         return view(
             'admin.students.show',
-            compact('student')
+            compact(
+                'student',
+                'statistics'
+            )
         );
     }
 
