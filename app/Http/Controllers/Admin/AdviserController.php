@@ -10,6 +10,7 @@ use App\Http\Requests\UpdateAdviserRequest;
 use App\Models\Adviser;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Student;
+use App\Models\DailyAttendance;
 
 class AdviserController extends Controller
 {   
@@ -131,6 +132,19 @@ class AdviserController extends Controller
                 'student',
                 'attendances'
             )
+        );
+    }
+
+    public function showAttendance(
+        DailyAttendance $attendance
+    )
+    {
+        $attendance = $this->adviserService
+            ->getAttendance($attendance);
+
+        return view(
+            'adviser.attendances.show',
+            compact('attendance')
         );
     }
 }

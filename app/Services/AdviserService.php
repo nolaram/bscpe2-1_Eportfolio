@@ -7,6 +7,7 @@ use App\Models\Role;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 use App\Models\Student;
+use App\Models\DailyAttendance;
 
 class AdviserService
 {
@@ -125,5 +126,12 @@ class AdviserService
         return $student->dailyAttendances()
             ->latest('attendance_date')
             ->paginate(10);
+    }
+
+    public function getAttendance(
+        DailyAttendance $attendance
+    ): DailyAttendance
+    {
+        return $attendance->load('student');
     }
 }

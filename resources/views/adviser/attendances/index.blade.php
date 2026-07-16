@@ -56,11 +56,11 @@
 <td>
 
 <a href="{{ route(
-    '#',
+    'adviser.attendances.show',
     $attendance
 ) }}">
-
-Review
+    Review
+</a>
 
 </a>
 

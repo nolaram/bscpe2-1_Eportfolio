@@ -106,6 +106,11 @@ Route::middleware(['auth', 'role:Adviser'])
                 '/students/{student}/attendances',
                 [AdviserController::class, 'studentAttendances']
             )->name('attendances.index');
+
+        Route::get(
+                '/attendances/{attendance}',
+                [AdviserController::class, 'showAttendance']
+            )->name('attendances.show');
     });
 
 Route::middleware(['auth', 'role:Student'])
