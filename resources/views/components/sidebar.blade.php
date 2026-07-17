@@ -283,7 +283,7 @@
 
             {{-- Weekly Reports --}}
             <a 
-                href=""
+                href="{{ route('student.student.weekly-reports.index') }}"
                 class="
                     flex items-center gap-3 rounded-lg px-3 py-3
                     transition hover:translate-x-1 hover:bg-primary-dark
