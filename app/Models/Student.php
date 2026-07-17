@@ -41,5 +41,10 @@ class Student extends Model
     {
         return $this->hasMany(DailyAttendance::class);
     }
+
+    public function weeklyReports(): HasMany
+    {
+        return $this->hasMany(WeeklyReport::class);
+    }
     
 }

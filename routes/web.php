@@ -135,6 +135,16 @@ Route::middleware(['auth', 'role:Student'])
             'profile',
             [ProfileController::class, 'update']
         )->name('profile.update');
+
+        Route::resource(
+            'weekly-reports',
+            \App\Http\Controllers\Student\WeeklyReportController::class
+        )->names('student.weekly-reports');
+
+        Route::patch(
+            'weekly-reports/{weeklyReport}/submit',
+            [\App\Http\Controllers\Student\WeeklyReportController::class, 'submit']
+        )->name('student.weekly-reports.submit');
             
     });
 

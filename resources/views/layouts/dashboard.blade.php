@@ -11,7 +11,11 @@
 
 <body
     class="bg-background overflow-hidden"
-    x-data="{ sidebarOpen: true }"
+    x-data="{
+        sidebarOpen: true,
+        previewOpen: false,
+        previewUrl: ''
+    }"
 >
 
     <div class="flex h-screen">
