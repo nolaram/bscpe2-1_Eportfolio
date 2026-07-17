@@ -1,5 +1,5 @@
 <x-app-layout>
-    
+
     <div class="px-6 pb-16 pt-14 text-center sm:px-8">
 
         <p class="text-xs font-semibold uppercase tracking-[0.25em] text-primary">
