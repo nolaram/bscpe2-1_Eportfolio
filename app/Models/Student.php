@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Models\Adviser;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Models\DailyAttendance;
+use App\Models\Document;
 
 class Student extends Model
 {
@@ -47,4 +48,8 @@ class Student extends Model
         return $this->hasMany(WeeklyReport::class);
     }
     
+    public function documents(): HasMany
+    {
+        return $this->hasMany(Document::class);
+    }
 }

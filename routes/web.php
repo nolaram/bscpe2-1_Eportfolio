@@ -145,6 +145,11 @@ Route::middleware(['auth', 'role:Student'])
             'weekly-reports/{weeklyReport}/submit',
             [\App\Http\Controllers\Student\WeeklyReportController::class, 'submit']
         )->name('student.weekly-reports.submit');
+
+        Route::resource(
+            'documents',
+            \App\Http\Controllers\Student\DocumentController::class
+        )->names('student.documents');
             
     });
 

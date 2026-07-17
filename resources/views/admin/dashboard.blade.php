@@ -3,7 +3,7 @@
     <div class="px-6 pb-16 pt-14 text-center sm:px-8">
 
         <p class="text-xs font-semibold uppercase tracking-[0.25em] text-primary">
-            Computer Engineering Department
+            Computer Engineering Program Section 2-1
         </p>
 
         <h1 class="mt-3 text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">
@@ -17,7 +17,7 @@
         </h2>
 
         <p class="mx-auto mt-2 max-w-xl text-gray-500">
-            Welcome back. Manage the OJT E-Portfolio system from one place.
+            Manage the BSCPE 2-1 E-Portfolio, including students, advisers, and attendance records.
         </p>
 
         {{-- Stat cards: centered, slightly larger gap, staggered fade-in on load --}}
