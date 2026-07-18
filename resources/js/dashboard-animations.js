@@ -84,6 +84,27 @@ function initCardStack() {
             anticipatePin: 1,
         });
     });
+
+    // Every card except the first is the one that gets "introduced" by
+    // sliding over the one before it. Easing it in from a slightly
+    // smaller scale — tied to scroll position, not time — softens the
+    // moment it locks into the pin, instead of a flat snap to full size.
+    cards.slice(1).forEach((card) => {
+        gsap.fromTo(
+            card,
+            { scale: 0.97 },
+            {
+                scale: 1,
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: card,
+                    start: 'top bottom',
+                    end: 'top top',
+                    scrub: true,
+                },
+            }
+        );
+    });
 }
 
 function initDashboardAnimations() {

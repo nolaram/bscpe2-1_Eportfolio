@@ -27,7 +27,15 @@
 
                         <span class="text-gray-300">•</span>
 
-                        <span>Administrator Portal</span>
+                        <span>
+                            @if(Auth::user()->role->name === 'Admin')
+                                Administrator Portal
+                            @elseif(Auth::user()->role->name === 'Adviser')
+                                Adviser Portal
+                            @else
+                                Student Portal
+                            @endif
+                        </span>
 
                     </div>
 
@@ -60,7 +68,7 @@
 
                                 <p class="text-xs text-gray-500">
 
-                                    System Administrator
+                                    {{ Auth::user()->role->name }}
 
                                 </p>
 

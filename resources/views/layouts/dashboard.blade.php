@@ -6,11 +6,14 @@
 
     <title>@yield('title', 'PUP OJT E-Portfolio')</title>
 
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600,700&display=swap" rel="stylesheet" />
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body
-    class="bg-background overflow-hidden"
+    class="bg-background font-sans antialiased overflow-hidden"
     x-data="{
         sidebarOpen: true,
         previewOpen: false,
