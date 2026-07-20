@@ -1,5 +1,6 @@
 import './bootstrap';
 import './dashboard-animations';
+import './auth-animations';
 
 import Alpine from 'alpinejs';
 

@@ -1,3 +1,62 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Slow-drifting background blobs on the auth pages */
+@keyframes blob-drift {
+    0%, 100% {
+        transform: translate(0, 0) scale(1);
+    }
+    33% {
+        transform: translate(20px, -15px) scale(1.05);
+    }
+    66% {
+        transform: translate(-15px, 10px) scale(0.97);
+    }
+}
+
+.animate-blob-drift {
+    animation: blob-drift 14s ease-in-out infinite;
+}
+
+.animate-blob-drift-slow {
+    animation: blob-drift 20s ease-in-out infinite;
+    animation-delay: -6s;
+}
+
+/* Dot-grid pattern layer (auth header) — small dots, fades toward the edges */
+.header-dot-grid {
+    background-image: radial-gradient(rgba(255, 255, 255, 0.18) 1px, transparent 1px);
+    background-size: 22px 22px;
+    -webkit-mask-image: radial-gradient(ellipse at center, black 45%, transparent 85%);
+    mask-image: radial-gradient(ellipse at center, black 45%, transparent 85%);
+}
+
+/* Soft pulsing glow behind the auth header logo */
+@keyframes header-glow-pulse {
+    0%, 100% {
+        opacity: 0.45;
+        transform: scale(0.9);
+    }
+    50% {
+        opacity: 0.85;
+        transform: scale(1.08);
+    }
+}
+
+.header-logo-glow {
+    background: radial-gradient(circle, rgba(255, 199, 44, 0.55), transparent 70%);
+    animation: header-glow-pulse 4s ease-in-out infinite;
+}
+
+/* Dots spawned by the login button burst effect (see auth-animations.js) */
+.login-burst-dot {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 8px;
+    height: 8px;
+    border-radius: 9999px;
+    pointer-events: none;
+}
+

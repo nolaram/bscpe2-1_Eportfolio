@@ -1,6 +1,9 @@
 <x-guest-layout>
 
-    <div class="mb-8 text-center">
+    <div
+        data-auth-field
+        class="mb-8 text-center"
+    >
 
         <h2 class="text-2xl font-bold text-gray-800">
             Welcome Back
@@ -12,13 +15,17 @@
         class="mb-4"
         :status="session('status')" />
 
-    <form method="POST" action="{{ route('login') }}">
+    <form
+        data-login-form
+        method="POST"
+        action="{{ route('login') }}"
+    >
 
         @csrf
 
         <!-- Email -->
 
-        <div>
+        <div data-auth-field>
 
             <x-input-label
                 for="email"
@@ -42,7 +49,10 @@
 
         <!-- Password -->
 
-        <div class="mt-6">
+        <div
+            data-auth-field
+            class="mt-6"
+        >
 
             <x-input-label
                 for="password"
@@ -64,7 +74,10 @@
 
         <!-- Remember Me -->
 
-        <div class="flex items-center justify-between mt-6">
+        <div
+            data-auth-field
+            class="flex items-center justify-between mt-6"
+        >
 
             <label
                 for="remember_me"
@@ -98,9 +111,15 @@
 
         <!-- Login Button -->
 
-        <div class="mt-8">
+        <div
+            data-auth-field
+            class="mt-8"
+        >
 
-            <x-primary-button class="w-full justify-center">
+            <x-primary-button
+                data-login-button
+                class="w-full justify-center relative"
+            >
 
                 Log In
 

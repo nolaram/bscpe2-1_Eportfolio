@@ -19,32 +19,59 @@
 <body class="font-sans antialiased bg-gray-50">
 
 
-<div class="min-h-screen flex flex-col">
+<div class="relative min-h-screen flex flex-col overflow-hidden">
 
+    {{-- Decorative drifting background blobs, same visual language as the dashboards --}}
+    <div class="pointer-events-none absolute -left-32 -top-32 h-96 w-96 rounded-full bg-primary/10 blur-3xl animate-blob-drift"></div>
+    <div class="pointer-events-none absolute -right-32 top-1/3 h-96 w-96 rounded-full bg-accent/20 blur-3xl animate-blob-drift-slow"></div>
+    <div class="pointer-events-none absolute bottom-0 left-1/3 h-80 w-80 rounded-full bg-primary/10 blur-3xl animate-blob-drift"></div>
 
     {{-- Header --}}
-    <header class="bg-primary text-white py-10">
+    <header
+        data-auth-header
+        class="relative bg-primary text-white py-10 overflow-hidden"
+    >
 
-        <div class="text-center">
+        {{-- Faint dot-grid texture, fades out toward the edges --}}
+        <div class="pointer-events-none absolute inset-0 header-dot-grid"></div>
 
-            <img
-                src="{{ asset('images/pup_logo.webp') }}"
-                alt="PUP Logo"
-                class="w-24 h-24 mx-auto mb-4"
+        <div class="relative text-center">
+
+            <div class="relative mx-auto mb-4 h-24 w-24">
+
+                {{-- Soft pulsing gold glow behind the logo --}}
+                <div class="pointer-events-none absolute inset-0 -z-10 rounded-full header-logo-glow"></div>
+
+                <img
+                    data-auth-logo
+                    src="{{ asset('images/pup_logo.webp') }}"
+                    alt="PUP Logo"
+                    class="h-24 w-24"
+                >
+
+            </div>
+
+
+            <h1
+                data-auth-heading
+                class="text-3xl font-bold"
             >
-
-
-            <h1 class="text-3xl font-bold">
                 OJT E-Portfolio
             </h1>
 
 
-            <p class="mt-2 text-gray-200">
+            <p
+                data-auth-heading
+                class="mt-2 text-gray-200"
+            >
                 Student Portal
             </p>
 
 
-            <p class="mt-4 text-sm text-gray-300">
+            <p
+                data-auth-heading
+                class="mt-4 text-sm text-gray-300"
+            >
                 Polytechnic University of the Philippines
             </p>
 
@@ -55,10 +82,11 @@
 
 
     {{-- Login Area --}}
-    <main class="flex-1 flex justify-center px-6 -mt-6">
+    <main class="relative flex-1 flex justify-center px-6 -mt-6">
 
 
         <div
+            data-auth-card
             class="w-full max-w-md bg-white rounded-xl shadow-lg border border-gray-200 p-8 h-fit"
         >
 
@@ -71,7 +99,7 @@
 
 
     {{-- Footer --}}
-    <footer class="text-center py-6 text-sm text-gray-400">
+    <footer class="relative text-center py-6 text-sm text-gray-400">
 
         © {{ date('Y') }} Polytechnic University of the Philippines
 
