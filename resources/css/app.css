@@ -24,22 +24,14 @@
     animation-delay: -6s;
 }
 
-/* Dot-grid pattern layer (auth header) — small dots, fades toward the edges */
-.header-dot-grid {
-    background-image: radial-gradient(rgba(255, 255, 255, 0.18) 1px, transparent 1px);
-    background-size: 22px 22px;
-    -webkit-mask-image: radial-gradient(ellipse at center, black 45%, transparent 85%);
-    mask-image: radial-gradient(ellipse at center, black 45%, transparent 85%);
-}
-
 /* Soft pulsing glow behind the auth header logo */
 @keyframes header-glow-pulse {
     0%, 100% {
-        opacity: 0.45;
+        opacity: 0.5;
         transform: scale(0.9);
     }
     50% {
-        opacity: 0.85;
+        opacity: 0.9;
         transform: scale(1.08);
     }
 }

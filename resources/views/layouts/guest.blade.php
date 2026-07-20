@@ -32,15 +32,20 @@
         class="relative bg-primary text-white py-10 overflow-hidden"
     >
 
-        {{-- Faint dot-grid texture, fades out toward the edges --}}
-        <div class="pointer-events-none absolute inset-0 header-dot-grid"></div>
+        {{-- Floating "constellation" star field (see star-field.js) --}}
+        <canvas
+            data-star-field
+            class="pointer-events-none absolute inset-0 h-full w-full"
+        ></canvas>
 
         <div class="relative text-center">
 
             <div class="relative mx-auto mb-4 h-24 w-24">
 
-                {{-- Soft pulsing gold glow behind the logo --}}
-                <div class="pointer-events-none absolute inset-0 -z-10 rounded-full header-logo-glow"></div>
+                {{-- Soft pulsing gold glow behind the logo — sized larger
+                     than the logo itself so the glow actually spills out
+                     around the edges instead of hiding behind it --}}
+                <div class="pointer-events-none absolute -inset-6 -z-10 rounded-full header-logo-glow"></div>
 
                 <img
                     data-auth-logo
